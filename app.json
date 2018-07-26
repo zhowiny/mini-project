@@ -1,0 +1,42 @@
+{
+    "pages":[
+        
+        "pages/mine/index/index",
+       
+        "pages/product/index/index"
+
+    ],
+    "window":{
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "美信",
+        "navigationBarTextStyle": "black"
+    },
+
+    "networkTimeout": {
+        "request": 6000,
+        "downloadFile": 20000,
+        "uploadFile": 20000
+    },
+    "tabBar": {
+        "color": "#666666",
+        "selectedColor": "#306FF4",
+        "backgroundColor": "#FFFFFF",
+        "list": [
+            {
+                "pagePath": "pages/mine/index/index",
+                "text": "我的在投",
+                "iconPath": "",
+                "selectedIconPath": ""
+            },
+            {
+                "pagePath": "pages/product/index/index",
+                "text": "产品推荐",
+                "iconPath": "",
+                "selectedIconPath": ""
+            }
+        ]
+    },
+
+    "debug": false
+}
