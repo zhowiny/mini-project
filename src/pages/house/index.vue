@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <ul class="house">
-      <li class="house_item" v-for="i in 5" :key="i" @click="toPage({url: '/pages/house_details/main', data: {orderId: index}})">
+      <li class="house_item" v-for="i in 5" :key="i" @click="toPage({url: '/pages/overseas_house_details/main', data: {orderId: index}})">
         <h2 class="house_item_title">曼谷双地铁公寓</h2>
         <p>
           <span class="house_item_time">2017-11-26</span>

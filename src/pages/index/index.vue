@@ -64,12 +64,12 @@ export default {
         {
           src: '/images/icon_insurance.png',
           title: '海外房产',
-          path: '/pages/overseas_house/main',
+          path: '/pages/house/main',
         },
         {
           src: '/images/icon_house.png',
           title: '海外保险',
-          path: '',
+          path: '/pages/insurance/main',
         },
         {
           src: '/images/icon_immigrant.png',
