@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/finance/main",
+    "pages/overseas_house/main",
+    "pages/finance_details/main",
+    "pages/file_page/main",
+    "pages/investment_report/main",
+    "pages/cash_back_records/main",
+    "pages/counter/main",
+    "pages/logs/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f5f5"
+  },
+  "tabBar": {
+    "color": "#cccccc",
+    "selectedColor": "#5387e3",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/main",
+        "text": "我的在投",
+        "iconPath": "images/icon_mine.png",
+        "selectedIconPath": "images/icon_mine_selected.png"
+      },
+      {
+        "pagePath": "pages/counter/main",
+        "text": "产品推荐",
+        "iconPath": "images/icon_product.png",
+        "selectedIconPath": "images/icon_product_selected.png"
+      }
+    ]
+  }
+}
