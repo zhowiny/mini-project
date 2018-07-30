@@ -1,27 +1,27 @@
 <template>
   <div class="container">
-    <ul class="house">
-      <li class="house_item" v-for="i in 5" :key="i" @click="toPage({url: '/pages/house_details/main', data: {orderId: index}})">
-        <h2 class="house_item_title">曼谷双地铁公寓</h2>
+    <ul class="immigrant">
+      <li class="immigrant_item" v-for="i in 5" :key="i" @click="toPage({url: '/pages/immigrant_details/main', data: {orderId: index}})">
+        <h2 class="immigrant_item_title">马耳他护照</h2>
         <p>
-          <span class="house_item_time">2017-11-26</span>
-          <span class="house_item_status">投资中</span>
+          <span class="immigrant_item_time">2017-11-26</span>
+          <span class="immigrant_item_status">办理中</span>
         </p>
-        <div class="house_item_info">
+        <div class="immigrant_item_info">
           <div>
-            <p>200,000.00泰铢</p>
-            <span>成交金额</span>
+            <p>里斯</p>
+            <span>目的国家</span>
           </div>
           <div>
-            <p>2019-12</p>
-            <span>交房时间</span>
+            <p>人民币</p>
+            <span>投资币种</span>
           </div>
           <div>
-            <p>6B201</p>
-            <span>房间号</span>
+            <p>3-6个月</p>
+            <span>办理周期</span>
           </div>
         </div>
-        <div class="house_item_notes" v-if="i < 2">
+        <!--<div class="immigrant_item_notes" v-if="i < 2">
           <div>
             <p>下期付款金额</p>
             <span>140,000.00泰铢</span>
@@ -30,7 +30,7 @@
             <p>下期付款日</p>
             <span>2019-3-14</span>
           </div>
-        </div>
+        </div>-->
       </li>
     </ul>
   </div>
@@ -40,7 +40,7 @@
   export default {
     data () {
       return {
-        title: '海外房产',
+        title: '移民项目',
       }
     },
     created () {
@@ -53,7 +53,7 @@
 </script>
 
 <style lang="scss" scoped>
-  .house {
+  .immigrant {
     &_item {
       min-height: 310rpx;
       margin-top: $middle-space;
@@ -90,20 +90,6 @@
         span {
           color: $lightColor;
           font-size: 26rpx;
-        }
-      }
-      &_notes {
-        margin-top: $small-space;
-        padding: $middle-space;
-        @include flex(space-around, stretch);
-        flex-direction: column;
-        color: $lightColor;
-        div {
-          flex: 1;
-          @include flex(space-between)
-        }
-        span {
-          color: red;
         }
       }
     }

@@ -20,12 +20,10 @@ a{
   text-decoration:none;
 }
 ::-moz-selection {
-  background: $selectioncolor;
   color: #fff;
   text-shadow: none;
 }
 ::selection {
-  background: $selectioncolor;
   text-shadow: none;
 }
 ::-webkit-scrollbar {

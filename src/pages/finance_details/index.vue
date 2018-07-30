@@ -48,12 +48,12 @@
         <span class="other_item_title">投资文件</span>
         <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
       </li>
-      <li class="other_item" @click="toPage({url: '/pages/investment_report/main', data: {orderId: 2}})">
+      <li class="other_item" @click="toPage({url: '/pages/order_investment_report/main', data: {orderId: 2}})">
         <image mode="aspectFit" src="/images/icon_report1.png" style="width: 50rpx;height:50rpx"></image>
         <span class="other_item_title">投资报告</span>
         <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
       </li>
-      <li class="other_item" @click="toPage({url: '/pages/cash_back_records/main', data: {orderId: 3}})">
+      <li class="other_item" @click="toPage({url: '/pages/order_cash_back_records/main', data: {orderId: 3}})">
         <image mode="aspectFit" src="/images/icon_record.png" style="width: 50rpx;height:50rpx"></image>
         <span class="other_item_title">回款记录</span>
         <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>

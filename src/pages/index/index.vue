@@ -1,7 +1,7 @@
 <template>
   <div class="container" >
     <div class="amount">
-      <image mode="aspectFit" src="/images/icon_amount.png" class="icon"></image>
+      <image @click="toPage('/pages/account_chart/main')" mode="aspectFit" src="/images/icon_amount.png" class="icon"></image>
       <div>
         <span>在投总额(美元)</span>
         <h1>123,456.00</h1>
@@ -26,13 +26,13 @@
         </wx-badge>
         <span>回款日历</span>
       </div>
-      <div class="toolbar_item" >
+      <div class="toolbar_item" @click="toPage('/pages/investment_report/main')">
         <wx-badge :value="3" position="top:15rpx;right:30rpx">
           <image mode="aspectFit" src="/images/icon_report.png" style="width: 102rpx;height:105rpx"></image>
         </wx-badge>
         <span>投资报告</span>
       </div>
-      <div class="toolbar_item">
+      <div class="toolbar_item" @click="toPage('/pages/after_sale/main')">
         <wx-badge :value="3" position="top:15rpx;right:30rpx">
           <image mode="aspectFit" src="/images/icon_after_sale.png" style="width: 102rpx;height:105rpx"></image>
         </wx-badge>
@@ -74,7 +74,7 @@ export default {
         {
           src: '/images/icon_immigrant.png',
           title: '移民护照',
-          path: '',
+          path: '/pages/immigrant/main',
         },
       ]
     }

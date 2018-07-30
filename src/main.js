@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import store from './store/index'
-import fly from './utils/http'
+import fly from './utils/request'
 import qs from 'qs'
 
 Vue.config.productionTip = false
@@ -12,7 +12,7 @@ Vue.mixin({
   onLoad () {
     if (this.$mp && this.$mp.mpType === 'page') {
       wx.setNavigationBarTitle({
-        title: this.title || 'wechat'
+        title: this.title || '美信'
       })
     }
   },

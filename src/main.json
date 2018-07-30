@@ -1,15 +1,19 @@
 {
   "pages": [
     "pages/index/main",
+    "pages/account_chart/main",
     "pages/finance/main",
     "pages/finance_details/main",
     "pages/house/main",
     "pages/house_details/main",
     "pages/insurance/main",
     "pages/insurance_details/main",
-    "pages/file_page/main",
+    "pages/immigrant/main",
     "pages/investment_report/main",
-    "pages/cash_back_records/main",
+    "pages/after_sale/main",
+    "pages/file_page/main",
+    "pages/order_investment_report/main",
+    "pages/order_cash_back_records/main",
     "pages/counter/main",
     "pages/logs/main"
   ],

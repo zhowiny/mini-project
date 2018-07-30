@@ -1,6 +1,6 @@
 # mini-project
 
-> zhowiny zoom
+> itrade-investor
 
 ## Build Setup
 
