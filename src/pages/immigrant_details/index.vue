@@ -10,7 +10,7 @@
         </li>
         <li>
           <span>产品名称</span>
-          <span>曼谷双地铁公寓</span>
+          <span>马耳他永居移民项目</span>
         </li>
         <li>
           <span>成交时间</span>
@@ -19,14 +19,6 @@
         <li>
           <span>投资金额</span>
           <span>200,000.00泰铢</span>
-        </li>
-        <li>
-          <span>交房时间</span>
-          <span>2017-7-16</span>
-        </li>
-        <li>
-          <span>房间号</span>
-          <span>A5201</span>
         </li>
       </ul>
     </div>
@@ -72,13 +64,13 @@
   export default {
     data () {
       return {
-        title: '海外房产订单详情',
+        title: '移民护照订单详情',
         active: 3,
         steps: [
           {title: '预约中'},
-          {title: '已签单'},
-          {title: '批核中'},
-          {title: '保单生效'},
+          {title: '申请合同'},
+          {title: '待入金'},
+          {title: '已入金'},
         ],
       }
     },

@@ -1,7 +1,8 @@
 <template>
-  <div class="container" >
+  <div class="container">
     <div class="amount">
-      <image @click="toPage('/pages/account_chart/main')" mode="aspectFit" src="/images/icon_amount.png" class="icon"></image>
+      <image @click="toPage('/pages/account_chart/main')" mode="aspectFit" src="/images/icon_amount.png"
+             class="icon"></image>
       <div>
         <span>在投总额(美元)</span>
         <h1>123,456.00</h1>
@@ -20,7 +21,7 @@
       </div>
     </div>
     <div class="toolbar">
-      <div class="toolbar_item" >
+      <div class="toolbar_item" @click="toPage('/pages/reimbursement_record/main')">
         <wx-badge :value="3" isHidden position="top:15rpx;right:30rpx">
           <image mode="aspectFit" src="/images/icon_calendar.png" style="width: 102rpx;height:105rpx"></image>
         </wx-badge>
@@ -40,76 +41,72 @@
       </div>
     </div>
     <div class="clause">
-      <p>由美信联邦提供投资者服务平台</p>
-      <a @click="a">《平台披露》</a>
+      <div class="btn" @click="concat">
+        <image mode="aspectFit" src="/images/icon_phone.png" style="width: 34rpx;height:30rpx"></image>
+        <span>联系我的小i投资顾问:  小小明</span>
+      </div>
+      <p>由美信联邦提供投资者服务平台:<a>《平台披露》</a></p>
+      <p>客服电话:<a>400-3333-3333</a></p>
     </div>
   </div>
 </template>
 
 <script>
-import card from '@/components/card'
-import wxBadge from '@/components/badge'
-import store from '../../store/index'
+  import card from '@/components/card'
+  import wxBadge from '@/components/badge'
+  import store from '../../store/index'
 
-export default {
-  data () {
-    return {
-      title: '我的在投',
-      productItemImages: [
-        {
-          src: '/images/icon_finance.png',
-          title: '金融资产',
-          path: '/pages/finance/main',
-        },
-        {
-          src: '/images/icon_insurance.png',
-          title: '海外房产',
-          path: '/pages/house/main',
-        },
-        {
-          src: '/images/icon_house.png',
-          title: '海外保险',
-          path: '/pages/insurance/main',
-        },
-        {
-          src: '/images/icon_immigrant.png',
-          title: '移民护照',
-          path: '/pages/immigrant/main',
-        },
-      ]
-    }
-  },
-  computed: {
-    userInfo () {
-      return store.state.userInfo
+  export default {
+    data () {
+      return {
+        title: '我的在投',
+        productItemImages: [
+          {
+            src: '/images/icon_finance.png',
+            title: '金融资产',
+            path: '/pages/finance/main',
+          },
+          {
+            src: '/images/icon_house.png',
+            title: '海外房产',
+            path: '/pages/house/main',
+          },
+          {
+            src: '/images/icon_insurance.png',
+            title: '海外保险',
+            path: '/pages/insurance/main',
+          },
+          {
+            src: '/images/icon_immigrant.png',
+            title: '移民护照',
+            path: '/pages/immigrant/main',
+          },
+        ]
+      }
     },
-  },
-  components: {
-    card,
-    wxBadge,
-  },
-  methods: {
-    bindViewTap () {
-      const url = '../logs/main'
-      wx.navigateTo({ url })
+    computed: {
+      userInfo () {
+        return store.state.userInfo
+      },
     },
-    // async a () {
-    //   try {
-    //     let result = await this.$http.post('/api/production/headerlist', {
-    //       'bigClass': 'BX',
-    //       'enabledFlag': 'Y',
-    //       'page': 1,
-    //       'pagesize': 10
-    //     })
-    //     console.log(result, 'success')
-    //   } catch (e) {
-    //     console.log(e, 'error')
-    //   }
-    // }
-  },
-  created () {
-  },
-}
+    components: {
+      card,
+      wxBadge,
+    },
+    methods: {
+      bindViewTap () {
+        const url = '../logs/main'
+        wx.navigateTo({url})
+      },
+      concat () {
+        wx.makePhoneCall({
+          phoneNumber: '18770009131'
+        })
+      }
+    },
+    created () {
+    },
+  }
 </script>
 <style scoped lang="scss">
   .container {
@@ -158,8 +155,8 @@ export default {
     }
     .toolbar {
       display: flex;
-      justify-content:space-around;
-      background:#fff;
+      justify-content: space-around;
+      background: #fff;
       padding: $big-space 0;
       @include size(100%, 265rpx);
       &_item {
@@ -176,8 +173,26 @@ export default {
       padding: 25rpx;
       line-height: 1.5;
       color: $lightColor;
+      p {
+        @include flex();
+      }
       a {
+        margin-left: $middle-space;
         color: $mainColor;
+      }
+      .btn {
+        @include size(480rpx, 80rpx);
+        @include flex();
+        color: $mainColor;
+        background: #fff;
+        border: 2rpx solid $mainColor;
+        border-radius: 40rpx;
+        font-size: 26rpx;
+        margin-top: $middle-space;
+        margin-bottom: $big-space;
+        span {
+          margin-left: $small-space;
+        }
       }
     }
   }
