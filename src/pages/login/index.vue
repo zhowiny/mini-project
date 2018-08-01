@@ -15,42 +15,15 @@ export default {
     }
   },
   methods: {
-    login () {
-      // 调用登录接口
-      wx.login({
-        success: res => {
-          // console.log(res, 'login')
-          this.getUserInfo()
-        }
-      })
-    },
-    getUserInfo () {
+    bindGetUserInfo (e) {
       wx.getUserInfo({
         success: (res) => {
-          // console.log(res, 'getInfo')
+          console.log(res, 'getInfo')
           this.userInfo = res.userInfo
           store.commit('setUserInfo', this.userInfo)
-          wx.redirectTo({
-            url: '/pages/index/main',
-            success: res => {
-              console.log(res, 'success')
-            },
-            fail: err => {
-              console.log(err, 'error')
-            }
-          })
+          this.toPage({url: '/pages/index/main', type: 'redirectTo'})
         }
       })
-    },
-    bindGetUserInfo (e) {
-      // console.log(e)
-      if (e.mp.detail.rawData) {
-        // 调用应用实例的方法获取全局数据
-        this.login()
-        console.log('用户按了允许授权按钮')
-      } else {
-        console.log('用户按了拒绝按钮')
-      }
     }
   },
   created () {
@@ -59,7 +32,7 @@ export default {
         // console.log(res, 'setting')
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          this.getUserInfo()
+          // this.bindGetUserInfo()
         }
       }
     })

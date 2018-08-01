@@ -8,6 +8,8 @@ var glob = require('glob')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var configFilesArray = []
 var relative = require('relative')
+const GenerateJsonPlugin = require('generate-json-webpack-plugin')
+const AppConfig = require('../src/config')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -31,10 +33,10 @@ function getEntry (rootSrc) {
 }
 
 const appEntry = { app: resolve('./src/main.js') }
-configFilesArray.push({
-    from: resolve('./src/main.json'),
-    to: 'app.json'
-})
+// configFilesArray.push({
+//     from: resolve('./src/main.json'),
+//     to: 'app.json'
+// })
 const pagesEntry = getEntry(resolve('./src'), 'pages/**/main.js')
 const entry = Object.assign({}, appEntry, pagesEntry)
 
@@ -118,6 +120,7 @@ module.exports = {
   },
   plugins: [
     new MpvuePlugin(),
-    new CopyWebpackPlugin(configFilesArray)
+    new CopyWebpackPlugin(configFilesArray),
+    new GenerateJsonPlugin('app.json', AppConfig)
   ]
 }

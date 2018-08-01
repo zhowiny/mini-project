@@ -1,9 +1,18 @@
+import qs from 'qs'
+import {API_DOMAIN, getTokenSecret} from './config'
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 
 fly.interceptors.request.use((config, promise) => {
   // 给所有请求添加自定义header
   // config.headers['X-Tag'] = 'flyio'
+  if (!~config.url.indexOf('?') && !~config.url.indexOf('access_token')) {
+    let params = {
+      sessionId: getTokenSecret().secret,
+      access_token: getTokenSecret().token,
+    }
+    config.url += `?${qs.stringify(params)}`
+  }
   wx.showLoading({
     title: '加载中',
   })
@@ -27,6 +36,6 @@ fly.interceptors.response.use((response) => {
   return Promise.reject(err)
 })
 // 配置请求基地址
-fly.config.baseURL = 'https://www.fortunefed.com'
+fly.config.baseURL = API_DOMAIN
 
 export default fly
