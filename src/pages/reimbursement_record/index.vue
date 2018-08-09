@@ -63,52 +63,6 @@
   .container {
     font-size: 24px;
   }
-  .amount {
-    @include size(100%, 148px);
-    @include flex();
-    background: $mainColor;
-    color: #fff;
-    text-align: center;
-    line-height: 1.6;
-    div {
-      flex: 1;
-      &:nth-child(2) {
-        border: 1px solid #fff;
-        border-top: none;
-        border-bottom: none;
-      }
-    }
-  }
-  .state {
-    @include size(100%, 110px);
-    @include flex();
-    position: sticky;
-    top: 0;
-    border-top: 1px solid $borderColor;
-    border-bottom: 1px solid $backgroundColor;
-    background: #fff;
-    color: $deepColor;
-    align-items: stretch;
-    div {
-      flex: 1;
-      text-align: center;
-      @include flex();
-      align-items: stretch;
-      p {
-        display: inline-flex;
-        align-items: center;
-        padding: 10px;
-        flex-shrink: 1;
-        border-bottom: 4px solid transparent;
-      }
-      &.actived {
-        color: $mainColor;
-        p {
-          border-bottom: 4px solid $mainColor;
-        }
-      }
-    }
-  }
   .product {
     &_item {
       @include size(100%, 310px);

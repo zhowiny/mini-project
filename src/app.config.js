@@ -5,6 +5,7 @@ module.exports = {
   'pages': [
     // 'pages/index/main', // 首页 我的在投
     'pages/register/main', // 注册开户
+    'pages/product_recommend/main', // 产品推荐
     'pages/authentication/main', // 身份认证
     'pages/questionnaire/main', // 合格投资者认定
     'pages/index/main', // 首页 我的在投
@@ -44,7 +45,7 @@ module.exports = {
         'selectedIconPath': 'images/icon_mine_selected.png'
       },
       {
-        'pagePath': 'pages/register/main',
+        'pagePath': 'pages/product_recommend/main',
         'text': '产品推荐',
         'iconPath': 'images/icon_product.png',
         'selectedIconPath': 'images/icon_product_selected.png'
