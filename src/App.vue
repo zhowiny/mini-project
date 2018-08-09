@@ -6,7 +6,8 @@ export default {
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    this.$auth.login()
+    // todo 登录获取openid
+    // this.$auth.login()
   },
   onShow () {
     // `this` 指向 vm 实例

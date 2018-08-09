@@ -22,7 +22,7 @@
           height = e.windowHeight
         }
       })
-      let colors = ['#56bdde', '#ffbc00', '#b198dc', '#ff6666', '#ffaa40', '#ff8e00', '#b1db49']
+      let colors = ['#00ad74', '#56bdde', '#ffbc00', '#b198dc', '#ff6666', '#ffaa40', '#ff8e00', '#b1db49']
         .concat(Array.apply(null, {length: 20}).map(() => '#' + (Math.random().toString(16).substr(2, 6))))
       return {
         canvas: {
@@ -85,7 +85,7 @@
         context.beginPath()
         context.setTextAlign('center')
         context.setTextBaseline('middle')
-        context.setFillStyle('#2d97fb')
+        context.setFillStyle('#00ad74')
         context.setFontSize(12)
         context.fillText('在投总额(美元)', point.x, point.y - 10)
         context.setFontSize(20)
@@ -107,7 +107,7 @@
           context.setTextAlign('left')
           context.fillText(item.title, x + 15, y)
           context.setTextAlign('right')
-          context.fillText(parseInt(item.value / this.total * 100) + '%', width / (index % 2 || 2) - 20, y)
+          context.fillText((item.value / this.total * 100).toFixed(2) + '%', width / (index % 2 || 2) - 20, y)
           context.closePath()
         })
       },

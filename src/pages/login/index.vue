@@ -42,7 +42,7 @@ export default {
 
 <style scoped>
 .getUserInfo {
-  width: 600rpx;
+  width: 600px;
 }
 .userinfo {
   display: flex;
@@ -51,9 +51,9 @@ export default {
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+  width: 128px;
+  height: 128px;
+  margin: 20px;
   border-radius: 50%;
 }
 

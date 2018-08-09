@@ -89,26 +89,26 @@
 
 <style lang="scss" scoped>
   .order_info {
-    @include size(100%, 686rpx);
+    @include size(100%, 686px);
     display: flex;
     flex-direction: column;
     margin: $middle-space 0;
     padding: 0 $middle-space;
     background: #fff;
-    font-size: 30rpx;
-    &_title {
+    font-size: 30px;
+&_title {
       @include flex(flex-start);
-      font-size: 32rpx;
-      height: 80rpx;
-      padding: $middle-space 0;
-      border-bottom: 1rpx solid $borderColor;
+      font-size: 32px;
+height: 80px;
+padding: $middle-space 0;
+      border-bottom: 1px solid $borderColor;
       span {
         display: inline-block;
         height: 100%;
-        width: 8rpx;
-        background: $mainColor;
-        margin-right: 10rpx;
-      }
+        width: 8px;
+background: $mainColor;
+        margin-right: 10px;
+}
     }
     &_content {
       padding: $small-space 0;
@@ -126,15 +126,15 @@
     background: #fff;
     &_item {
       padding: $middle-space;
-      @include size(100%, 100rpx);
+      @include size(100%, 100px);
       display: flex;
       align-items: center;
-      border-bottom: 1rpx solid $backgroundColor;
+      border-bottom: 1px solid $backgroundColor;
       &_title {
         flex: 1;
         padding: $middle-space;
-        font-size: 30rpx;
-      }
+        font-size: 30px;
+}
     }
   }
 </style>

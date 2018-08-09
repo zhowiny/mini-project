@@ -9,7 +9,7 @@ var CopyWebpackPlugin = require('copy-webpack-plugin')
 var configFilesArray = []
 var relative = require('relative')
 const GenerateJsonPlugin = require('generate-json-webpack-plugin')
-const AppConfig = require('../src/config')
+const AppConfig = require('../src/app.config')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)

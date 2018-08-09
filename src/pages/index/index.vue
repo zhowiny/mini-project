@@ -8,19 +8,28 @@
         <span>在投总额(美元)</span>
         <h1>123,456.00</h1>
       </div>
-      <div>
-        <span>累计收益(美元)</span>
-        <h1>846.78</h1>
+    </div>
+    <div class="product_container">
+      <div class="product">
+        <div class="product_item" v-for="(item,index) in productItemImages" :key="index" @click="toPage(item.path)">
+          <div class="product_item_icon">
+            <img mode="aspectFit" :src="item.src" style="width: 68rpx;height:68rpx" />
+          </div>
+          <div>
+            <span class="product_item_title">{{item.title}}</span>
+            <span class="product_item_amount">$3,000.00</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="product">
+   <!-- <div class="product">
       <div class="product_item" v-for="(item,index) in productItemImages" :key="index" @click="toPage(item.path)">
         <img mode="aspectFit" :src="item.src" style="width: 44rpx;height:44rpx" />
         <span class="product_item_title">{{item.title}}</span>
         <span class="product_item_amount">$3,000.00</span>
         <img mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"/>
       </div>
-    </div>
+    </div>-->
     <div class="toolbar">
       <div class="toolbar_item" @click="toPage('/pages/reimbursement_record/main')">
         <wx-badge :value="3" isHidden position="top:15rpx;right:30rpx">
@@ -53,7 +62,6 @@
 </template>
 
 <script>
-  import card from '@/components/card'
   import wxBadge from '@/components/badge'
   import store from '../../store/index'
 
@@ -91,7 +99,6 @@
       },
     },
     components: {
-      card,
       wxBadge,
     },
     methods: {
@@ -114,12 +121,17 @@
     @include size(100%);
     .amount {
       background: linear-gradient($mainColor, lighten($mainColor, 10%));
-      @include size(100%, 304px);
+      @include size(100%, 260px);
       color: #fff;
       position: relative;
       padding: $middle-space;
       text-align: center;
       letter-spacing: 4px;
+      @include flex();
+      > div {
+        position: relative;
+        top: -$small-space;
+      }
       span {
         font-size: 22px;
       }
@@ -134,7 +146,7 @@
       @include size(40px);
     }
 
-    .product {
+    /*.product {
       margin-top: $middle-space;
       background: #fff;
       &_item {
@@ -153,13 +165,44 @@
           font-size: 28px;
         }
       }
+    }*/
+    .product_container {
+      padding:0 $small-space * 3;
+      background: #fff;
+      height: 400px;
+      .product {
+        position: relative;
+        top: -45px;
+        @include flex();
+        flex-wrap: wrap;
+        @include size(100%);
+        border-radius: 10px;
+        box-shadow: 0 0 20px -5px $mainColor;
+        background: #fff;
+        &_item {
+          width: 50%;
+          @include flex(flex-start);
+          font-size: 30px;
+          &_icon {
+            padding: 0 $big-space;
+            @include flex();
+          }
+          span {
+            display: block;
+          }
+          &_amount {
+            font-size: 28px;
+            color: lighten($deepColor, 30%);
+          }
+        }
+      }
     }
     .toolbar {
       display: flex;
       justify-content: space-around;
       background: #fff;
-      padding: $big-space 0;
-      @include size(100%, 265px);
+      padding-bottom: $middle-space;
+      @include size(100%, 190px);
       &_item {
         /*display: flex;*/
         @include flex(space-around);
@@ -182,7 +225,7 @@
         color: $mainColor;
       }
       .btn {
-        @include size(480px, 80px);
+        @include size(500px, 80px);
         @include flex();
         color: $mainColor;
         background: #fff;

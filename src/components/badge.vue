@@ -40,7 +40,7 @@
   }
 </script>
 
-<style scoped >
+<style scoped>
 
   .wx-badge {
     position: relative;
@@ -49,35 +49,39 @@
     justify-content: center;
     align-items: center;
   }
+
   .el-badge__content {
     background-color: #f56c6c;
-    border-radius: 15rpx;
+    border-radius: 15px;
     color: #fff;
     display: inline-block;
-    font-size: 20rpx;
-    height: 30rpx;
-    line-height: 30rpx;
-    padding: 0 8rpx;
+    font-size: 20px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 8px;
     text-align: center;
     white-space: nowrap;
-    letter-spacing: 1rpx;
+    letter-spacing: 1px;
     font-weight: 100;
-    /*border: 1rpx solid #fff;*/
+    /*border: 1px solid #fff;*/
   }
+
   .el-badge__content.is-fixed {
     position: absolute;
     top: 0;
-    right: 10rpx;
+    right: 10px;
     transform: translateY(-50%) translateX(100%);
   }
+
   .el-badge__content.is-dot {
-    height: 8rpx;
-    width: 8rpx;
+    height: 8px;
+    width: 8px;
     padding: 0;
     right: 0;
     border-radius: 50%;
   }
+
   .el-badge__content.is-fixed.is-dot {
-    right: 5rpx;
+    right: 5px;
   }
 </style>

@@ -3,6 +3,10 @@
  **/
 module.exports = {
   'pages': [
+    // 'pages/index/main', // 首页 我的在投
+    'pages/register/main', // 注册开户
+    'pages/authentication/main', // 身份认证
+    'pages/questionnaire/main', // 合格投资者认定
     'pages/index/main', // 首页 我的在投
     'pages/account_chart/main', // 账号总览
     'pages/finance/main', // 金融投资列表
@@ -19,9 +23,6 @@ module.exports = {
     'pages/file_page/main', // 文件展示页
     'pages/order_investment_report/main', // 订单详情-投资报告
     'pages/order_reimbursement_record/main', // 订单详情-回款记录
-    'pages/counter/main',
-    'pages/login/main',
-    'pages/logs/main'
   ],
   'window': {
     'backgroundTextStyle': 'light',
@@ -32,7 +33,7 @@ module.exports = {
   },
   'tabBar': {
     'color': '#cccccc',
-    'selectedColor': '#5387e3',
+    'selectedColor': '#00ad74',
     'borderStyle': 'white',
     'backgroundColor': '#fff',
     'list': [
@@ -43,7 +44,7 @@ module.exports = {
         'selectedIconPath': 'images/icon_mine_selected.png'
       },
       {
-        'pagePath': 'pages/login/main',
+        'pagePath': 'pages/register/main',
         'text': '产品推荐',
         'iconPath': 'images/icon_product.png',
         'selectedIconPath': 'images/icon_product_selected.png'

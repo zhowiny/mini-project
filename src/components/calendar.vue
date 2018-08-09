@@ -208,18 +208,18 @@
     position: relative;
     background: $mainColor;
     @include flex();
-    font-size: 32rpx;
+    font-size: 32px;
     color: #fff;
     padding: $middle-space 0;
     p {
       padding: 0 $small-space;
     }
     div {
-      width: 50rpx;
+      width: 50px;
       @include flex();
     }
     .month-list, .year-list {
-      width:260rpx;
+      width:260px;
       position:absolute;
       background:#fff;
       color: $mainColor;
@@ -229,19 +229,19 @@
       box-shadow:0 0 5px;
       z-index:10;
       span {
-        width: calc(50% - 1rpx);
+        width: calc(50% - 1px);
         padding: $small-space 0;
-        border-bottom: 1rpx solid lighten($mainColor, 20%);
+        border-bottom: 1px solid lighten($mainColor, 20%);
         transition: background .3s;
       }
       span:nth-child(odd) {
-        border-right: 1rpx solid lighten($mainColor, 20%);
+        border-right: 1px solid lighten($mainColor, 20%);
       }
       span:nth-child(11), span:last-child {
         border-bottom: none;
       }
       span.selected {
-        background: lighten($mainColor, 20%);
+        background: $mainColor;
         color: #fff;
       }
     }
@@ -250,7 +250,7 @@
     @include flex();
     background: $mainColor;
     color: #fff;
-    font-size: 24rpx;
+    font-size: 24px;
     padding: $middle-space 0;
     text-align: center;
     div {
@@ -268,7 +268,7 @@
       @include flex();
       padding: $small-space / 2 0;
       span {
-        @include size(72rpx);
+        @include size(72px);
         @include flex();
         color: $deepColor;
         background: transparent;
@@ -288,14 +288,14 @@
       }
       &.hasData:before {
         content: '';
-        @include size(10rpx);
+        @include size(10px);
         border-radius: 50%;
         background: red;
         @include center(20%);
       }
       &.hasData:after {
         content: '';
-        @include size(32rpx, 4rpx);
+        @include size(32px, 4px);
         background: $mainColor;
         @include center(50%, auto);
         bottom: 0;

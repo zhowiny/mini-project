@@ -61,10 +61,10 @@
 
 <style lang="scss" scoped>
   .container {
-    font-size: 24rpx;
+    font-size: 24px;
   }
   .amount {
-    @include size(100%, 148rpx);
+    @include size(100%, 148px);
     @include flex();
     background: $mainColor;
     color: #fff;
@@ -73,19 +73,19 @@
     div {
       flex: 1;
       &:nth-child(2) {
-        border: 1rpx solid #fff;
+        border: 1px solid #fff;
         border-top: none;
         border-bottom: none;
       }
     }
   }
   .state {
-    @include size(100%, 110rpx);
+    @include size(100%, 110px);
     @include flex();
     position: sticky;
     top: 0;
-    border-top: 1rpx solid $borderColor;
-    border-bottom: 1rpx solid $backgroundColor;
+    border-top: 1px solid $borderColor;
+    border-bottom: 1px solid $backgroundColor;
     background: #fff;
     color: $deepColor;
     align-items: stretch;
@@ -97,21 +97,21 @@
       p {
         display: inline-flex;
         align-items: center;
-        padding: 10rpx;
+        padding: 10px;
         flex-shrink: 1;
-        border-bottom: 4rpx solid transparent;
+        border-bottom: 4px solid transparent;
       }
       &.actived {
         color: $mainColor;
         p {
-          border-bottom: 4rpx solid $mainColor;
+          border-bottom: 4px solid $mainColor;
         }
       }
     }
   }
   .product {
     &_item {
-      @include size(100%, 310rpx);
+      @include size(100%, 310px);
       margin-top: $middle-space;
       padding: $middle-space;
       background: #fff;
@@ -119,13 +119,13 @@
         @include flex(space-between);
         padding: $middle-space 0;
         color: $lightColor;
-        font-size: 26rpx;
+        font-size: 26px;
       }
       &_title {
         @include flex(space-between);
         margin-bottom: $middle-space;
         h2 {
-          font-size: 36rpx;
+          font-size: 36px;
         }
         p {
           @include flex()
@@ -137,17 +137,17 @@
       }
       &_info {
         @include flex();
-        @include size(100%, 177rpx);
+        @include size(100%, 177px);
         text-align: center;
         line-height: 1.6;
-        border-top: 1rpx solid $borderColor;
+        border-top: 1px solid $borderColor;
         div {
           flex: 1;
-          font-size: 30rpx;
+          font-size: 30px;
         }
         span {
           color: $lightColor;
-          font-size: 26rpx;
+          font-size: 26px;
         }
       }
     }
