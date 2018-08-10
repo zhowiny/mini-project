@@ -7,11 +7,11 @@ export default {
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     // todo 登录获取openid
-    this.$auth.login()
+    // this.$auth.login()
   },
   onShow () {
     // `this` 指向 vm 实例
-    console.log(this.$store)
+    // console.log(this.$store)
   }
 }
 </script>

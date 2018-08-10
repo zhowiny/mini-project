@@ -60,7 +60,6 @@ export default {
   .container{
     font-size: 24rpx;
     color: #555;
-    background: #F4F4F4;
   }
   swiper{
     height: 450rpx;
