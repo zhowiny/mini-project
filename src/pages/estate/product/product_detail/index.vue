@@ -3,7 +3,7 @@
     <swiper autoplay>
       <block v-for="(item,index) in bannerList" :key="index">
         <swiper-item>
-          <image :src="item.url" class="banner_img" v-if="item.type == 1"></image>
+          <img :src="item.url" class="banner_img" v-if="item.type == 1" />
           <video src="" class="banner_video" v-if="item.type == 2"></video>
           <image v-if="item.type == 2" src="/images/icon_video.png" class="video_icon"/>
           <image src="/images/icon_pic.png" class="pic_icon"/>
@@ -13,7 +13,7 @@
     </swiper>
     <P class="product_title">慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15</P>
     <div class="product_address">
-      <image src="/images/icon_map.png" class="map_icon"></image>
+      <img src="/images/icon_map.png" class="map_icon" />
       <span>泰国 · 曼谷</span>
       <div class="border_small">|</div>
       <div>佣金：<span class="commision">15%</span></div>
@@ -60,6 +60,7 @@ export default {
   .container{
     font-size: 24rpx;
     color: #555;
+    background: #F4F4F4;
   }
   swiper{
     height: 450rpx;
@@ -126,10 +127,6 @@ export default {
     align-items: center;
     padding: 0 20rpx;
     margin-top: 45rpx;
-  }
-  .feature_li{
-    /* display: flex;
-    align-items: center; */
   }
   /* .option{
     height: 94rpx;

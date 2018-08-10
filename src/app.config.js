@@ -24,7 +24,6 @@ module.exports = {
     'pages/file_page/main', // 文件展示页
     'pages/order_investment_report/main', // 订单详情-投资报告
     'pages/order_reimbursement_record/main', // 订单详情-回款记录
-<<<<<<< HEAD:src/config.js
     'pages/counter/main',
     'pages/login/main',
     'pages/logs/main',
@@ -34,8 +33,6 @@ module.exports = {
     'pages/estate/product/product_detail/main',
     
 
-=======
->>>>>>> d726befff3318d2b98144a2ded98352e3ddb2ae2:src/app.config.js
   ],
   'window': {
     'backgroundTextStyle': 'light',
