@@ -55,7 +55,7 @@
 <style lang="scss" scoped>
   .house {
     &_item {
-      min-height: 310rpx;
+      min-height: 310px;
       margin-top: $middle-space;
       h2, p, div {
         background: #fff;
@@ -68,28 +68,28 @@
         @include flex(space-between);
         padding: $middle-space;
         color: $lightColor;
-        font-size: 26rpx;
+        font-size: 26px;
       }
       &_title {
-        font-size: 36rpx;
+        font-size: 36px;
       }
       &_status {
         color: $mainColor;
       }
       &_info {
         @include flex();
-        @include size(100%, 177rpx);
+        @include size(100%, 177px);
         padding: $middle-space;
         text-align: center;
         line-height: 1.6;
-        border-top: 1rpx solid $borderColor;
+        border-top: 1px solid $borderColor;
         div {
           flex: 1;
-          font-size: 30rpx;
+          font-size: 30px;
         }
         span {
           color: $lightColor;
-          font-size: 26rpx;
+          font-size: 26px;
         }
       }
       &_notes {

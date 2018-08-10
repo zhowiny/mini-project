@@ -1,4 +1,4 @@
-import * as config from './config'
+import * as config from './const'
 import fly from './request'
 /* eslint-disable */
 import qs from 'qs'

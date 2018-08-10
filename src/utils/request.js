@@ -1,5 +1,5 @@
 import qs from 'qs'
-import {API_DOMAIN, getTokenSecret} from './config'
+import {API_DOMAIN, getTokenSecret} from './const'
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 

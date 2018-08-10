@@ -40,7 +40,7 @@
 <style lang="scss" scoped>
   .report {
     li {
-      @include size(100%, 158rpx);
+      @include size(100%, 158px);
       @include flex(space-around, flex-start);
       flex-direction: column;
       margin-top: $small-space;
@@ -48,10 +48,10 @@
       background: #fff;
       color: $lightColor;
       h4 {
-        font-size: 30rpx;
+        font-size: 30px;
       }
       p {
-        font-size: 26rpx;
+        font-size: 26px;
       }
       &.unread h4{
         color: $deepColor;

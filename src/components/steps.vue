@@ -27,7 +27,7 @@
 <style scoped lang='scss'>
   .steps {
     @include flex();
-    @include size(100%, 235rpx);
+    @include size(100%, 235px);
     background: $mainColor;
     .step {
       flex: 1;
@@ -36,7 +36,7 @@
         @include flex();
         position: relative;
         &-line {
-          width: calc(100% - 48rpx);
+          width: calc(100% - 48px);
           height: 2px;
           background: $lightColor;
           @include center(100%);
@@ -49,7 +49,7 @@
         display: none;
       }
       &-main {
-        padding: 0 14rpx;
+        padding: 0 14px;
         color: #cccccc;
       }
       &.actived .step-main{

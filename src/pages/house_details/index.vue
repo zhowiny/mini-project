@@ -94,25 +94,25 @@
 
 <style lang="scss" scoped>
   .order_info {
-    // @include size(100%, 686rpx);
+    // @include size(100%, 686px);
     display: flex;
     flex-direction: column;
     margin: $middle-space 0;
     padding: 0 $middle-space;
     background: #fff;
-    font-size: 30rpx;
+    font-size: 30px;
     &_title {
       @include flex(flex-start);
-      font-size: 32rpx;
-      height: 80rpx;
+      font-size: 32px;
+      height: 80px;
       padding: $middle-space 0;
-      border-bottom: 1rpx solid $borderColor;
+      border-bottom: 1px solid $borderColor;
       span {
         display: inline-block;
         height: 100%;
-        width: 8rpx;
+        width: 8px;
         background: $mainColor;
-        margin-right: 10rpx;
+        margin-right: 10px;
       }
     }
     &_content {
@@ -131,14 +131,14 @@
     background: #fff;
     &_item {
       padding: $middle-space;
-      @include size(100%, 100rpx);
+      @include size(100%, 100px);
       display: flex;
       align-items: center;
-      border-bottom: 1rpx solid $backgroundColor;
+      border-bottom: 1px solid $backgroundColor;
       &_title {
         flex: 1;
         padding: $middle-space;
-        font-size: 30rpx;
+        font-size: 30px;
       }
     }
   }
@@ -152,8 +152,8 @@
       padding: 0;
       color: $lightColor;
       li {
-        border-bottom: 1rpx solid $borderColor;
-        height: 100rpx;
+        border-bottom: 1px solid $borderColor;
+        height: 100px;
       }
       .unpaid {
         color: $deepColor;
