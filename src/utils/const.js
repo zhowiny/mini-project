@@ -1,5 +1,5 @@
 const API_DOMAIN = 'https://www.fortunefed.com'
-const APPID = 'wx852f55ac0db71552' // mine
+const APPID = 'wxcd7c5762adbd3cf5' // meixin－c
 /** 手机品牌 **/
 let dBrand = ''
 /** 手机型号 **/
