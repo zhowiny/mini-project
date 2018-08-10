@@ -21,7 +21,13 @@ module.exports = {
     'pages/order_reimbursement_record/main', // 订单详情-回款记录
     'pages/counter/main',
     'pages/login/main',
-    'pages/logs/main'
+    'pages/logs/main',
+
+
+    'pages/estate/process/choose_customer/main',
+    'pages/estate/product/product_detail/main',
+    
+
   ],
   'window': {
     'backgroundTextStyle': 'light',
