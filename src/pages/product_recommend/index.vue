@@ -65,7 +65,11 @@
     },
     methods: {
       handleClick (item, index) {
-        if (item.operate) item.operate = false
+        if (!item.operate) {
+          this.toPage({url: '/pages/product_detail/main', data: {a: 1, orderId: index + 1}})
+        } else {
+          item.operate = false
+        }
       },
       handleStart (e) {
         this.point.startX = e.clientX
@@ -105,7 +109,7 @@
       @include flex(flex-start);
       margin-top: $middle-space;
       background: #fff;
-      transition: transform .3s;
+      transition: transform .2s linear;
       &.operate {
         transform: translateX(-150px);
       }

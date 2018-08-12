@@ -5,7 +5,6 @@ module.exports = {
   'pages': [
     // 'pages/index/main', // 首页 我的在投
     'pages/register/main', // 注册开户
-    'pages/product_recommend/main', // 产品推荐
     'pages/authentication/main', // 身份认证
     'pages/questionnaire/main', // 合格投资者认定
     'pages/index/main', // 首页 我的在投
@@ -25,6 +24,8 @@ module.exports = {
     'pages/order_investment_report/main', // 订单详情-投资报告
     'pages/order_reimbursement_record/main', // 订单详情-回款记录
     'pages/article/main', // 文章详情
+    'pages/product_recommend/main', // 产品推荐
+    'pages/product_detail/main', // 产品详情
     'pages/estate/process/choose_customer/main',
     'pages/estate/product/product_detail/main',
   ],
