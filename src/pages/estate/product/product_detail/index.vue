@@ -274,7 +274,6 @@ export default {
       let index = e.target.current
       this.type = this.bannerList[index].type
       this.current = index + 1
-      console.log(this.type)
     },
   },
   created () {
@@ -324,12 +323,6 @@ export default {
     width: 100%;
     height: 450rpx;
   }
-  // .page_box{
-  //   width: 100%;
-  //   height: 450rpx;
-  //   position: relative;
-  //   top: 0;
-  // }
   .product_simple{
     background: #fff;
     padding-bottom: 35rpx;
@@ -363,7 +356,6 @@ export default {
     align-items: center;
     padding: 0 20rpx;
     margin-top: 45rpx;
-    // position: relative;
   }
   .amount{
     color: #306FF4;
