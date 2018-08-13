@@ -12,7 +12,7 @@
       </div>
       <div class="fields_row">
         <input type="text" placeholder="图片验证码" placeholder-style="color: #ccc;">
-        <img src="/images/icon_arrow.png" mode="aspectFit" style="width: 180rpx;height:60rpx;background: #dddddd">
+        <img src="/images/icon_placeholder.png" mode="aspectFit" style="width: 180rpx;height:60rpx;">
       </div>
       <div class="fields_row">
         <input type="text" placeholder="短信校验码" placeholder-style="color: #ccc;">
@@ -159,6 +159,9 @@ export default {
       }
       .phone {
         padding-left: $middle-space;
+      }
+      img {
+        background: $backgroundColor;
       }
     }
     .protocol {

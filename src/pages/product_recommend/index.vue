@@ -1,8 +1,14 @@
 <template>
   <div class="container">
     <ul class="product">
-      <li class="product_item" v-for="(item, index) in data" :key="index" :class="{operate: item.operate}" @click="handleClick(item, index)" @touchstart="handleStart" @touchmove="handleMove" @touchend="handleEnd(item,index)">
-        <div class="product_item_main" >
+      <li class="product_item"
+          v-for="(item, index) in data"
+          :key="index" :class="{operate: item.operate}"
+          @touchstart="handleStart"
+          @touchmove="handleMove"
+          @touchend="handleEnd(item,index)"
+      >
+        <div class="product_item_main" @click="handleClick(item, index)">
           <div class="product_item_title">
             <div>
               <h2>{{index}}金融资产产品{{item.name}}</h2>
@@ -59,17 +65,21 @@
     },
     methods: {
       handleClick (item, index) {
-        if (item.operate) item.operate = false
+        if (!item.operate) {
+          this.toPage({url: '/pages/product_detail/main', data: {a: 1, orderId: index + 1}})
+        } else {
+          item.operate = false
+        }
       },
       handleStart (e) {
         this.point.startX = e.clientX
         this.point.startY = e.clientY
-        this.point.endX = -1
-        this.point.endY = -1
+        this.point.endX = e.clientX
+        this.point.endY = e.clientY
       },
       handleEnd (item, index) {
         if (item.isOverdue) return
-        if (Math.abs(this.point.startY - this.point.endY) >= 30 || this.point.endX < 0 || this.point.endY < 0) return
+        if (Math.abs(this.point.startY - this.point.endY) >= 30) return
         let distance = this.point.startX - this.point.endX
         if (distance > 0 && distance > 50) {
           console.log('swiper left')
@@ -99,7 +109,7 @@
       @include flex(flex-start);
       margin-top: $middle-space;
       background: #fff;
-      transition: transform .3s;
+      transition: transform .2s linear;
       &.operate {
         transform: translateX(-150px);
       }

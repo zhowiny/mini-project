@@ -88,9 +88,9 @@
       color: $deepColor;
       box-shadow: 0 0 15px -3px $mainColor;
       background: #fff;
-      transition: all .2s;
+      transition: transform .2s linear, opacity .2s linear;
       transform-origin: top center;
-      transform: scaleY(0);
+      transform: scale3d(1, 0, 1);
       opacity: .3;
       li {
         padding: $small-space $middle-space;
@@ -102,7 +102,7 @@
         }
       }
       &.actived {
-        transform: scaleY(1);
+        transform: scale3d(1, 1, 1);
         opacity: 1;
       }
     }
