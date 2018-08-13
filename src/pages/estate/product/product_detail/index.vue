@@ -1,17 +1,17 @@
 <template>
   <div class="container">
-    <div>
-      <swiper autoplay>
+    <div class="banner_box">
+      <swiper autoplay @change="changeCurrent">
         <block v-for="(item,index) in bannerList" :key="index">
           <swiper-item>
-            <img :src="item.url" class="banner_img" v-if="item.type == 1" />
-            <video src="" class="banner_video" v-if="item.type == 2"></video>
-            <cover-image v-if="item.type == 2" src="/images/icon_video.png" class="video_icon"/>
-            <cover-image src="/images/icon_pic.png" class="pic_icon"/>
-            <div class="banner_page">{{index + 1}}/{{bannerList.length}}</div>
+            <img :src="item.url" class="banner_img"/>
+            <!-- <video :src="item.url" class="banner_video" v-if="item.type == 2"></video> -->
           </swiper-item>
         </block>
       </swiper>
+      <cover-image src="/images/icon_video.png" v-if="type == 2" class="video_icon"/>
+      <cover-image src="/images/icon_pic.png" class="pic_icon"/>
+      <div class="banner_page">{{current}}/{{bannerList.length}}</div>
     </div>
     
     <div class="product_simple">
@@ -130,11 +130,104 @@
               <p>1A-102 · 28㎡ · ¥62万</p>
             </div>
           </div>
-          
         </scroll-view>
       </div>
     </div>
     
+    <div class="image_and_text">
+      <div class="img_text_tags">
+        <block v-for="(item,index) in houseTagList" :key="index">
+          <p :class="selectedHouse == item.value ? 'img_text_tag_active' : 'img_text_tag'" @click="changeHouseTag(item.value)">{{item.name}}</p>
+        </block>
+      </div>
+      <div class="text_detail" v-if="selectedHouse == 1">
+        <p>多通道抵达主路（Ladprao road、Phaholyothin road、Ratchadapisek road、Soi Ladprao 1、Soi Ladprao 15和Soi Phaholyothin 24）、
+          区域内规建超大型超市功能区、规建中的BTS延长线绿色线与现有MRT汇合实现双轨交汇、步行可达当地人最爱的Central Ladprao商场及多个市政公园、
+          泰国本地人最热衷的居住区域，多个泰国“央企”总部所在地、周边设有国际学校以及泰国大学。</p>
+        <img src="https://doc.meixinglobal.com/docs/20180704/1530636670707/26/6.jpg" class="detail_img"/>
+        <p>多通道抵达主路（Ladprao road、Phaholyothin road、Ratchadapisek road、Soi Ladprao 1、Soi Ladprao 15和Soi Phaholyothin 24）、
+          区域内规建超大型超市功能区、规建中的BTS延长线绿色线与现有MRT汇合实现双轨交汇、
+          步行可达当地人最爱的Central Ladprao商场及多个市政公园、泰国本地人最热衷的居住区域。</p>
+      </div>
+      <div class="purchase_notice" v-if="selectedHouse == 2">
+        <div class="purchase_process">
+          <p class="process_label">交易流程</p>
+          <img src="https://file.meixinglobal.com/media/20180813/4340b295-a576-4b77-883c-a2e827a45f11.png" class="process_img" />
+          <p class="img_title">LP15售中流程</p>
+        </div>
+        <div class="border_block"></div>
+        <div class="question" >
+          <p class="question_label">问题解答</p>
+          <block>
+            <div class="question_answer">
+              <div class="question_box">
+                <img class="question_icon" src="/images/icon_question.png" />
+                <p class="question_title">柯罗尼物流地产基金主要投资于标的基金CIF 柯罗尼物流地产基金主要投资于标的基金CIF?</p>
+              </div>
+              <div class="answer_box">
+                <div class="question_box">
+                  <img class="question_icon" src="/images/icon_answer.png" />
+                  <p class="question_title">柯罗尼物流地产基金主要投资于标的基金CIF（Colony Industrial Fund）项下的优质物流地产投资组合。
+                  投资组合足够分散，覆盖全美16个州，总投资规模达3,900万平方英尺；</p>
+                </div>
+                <p class="answer_time">2017年12月29日</p>
+              </div>
+            </div>
+            <div class="question_answer">
+              <div class="question_box">
+                <img class="question_icon" src="/images/icon_question.png" />
+                <p class="question_title">柯罗尼物流地产基金主要投资于标的基金CIF?</p>
+              </div>
+              <div class="answer_box">
+                <div class="question_box">
+                  <img class="question_icon" src="/images/icon_answer.png" />
+                  <p class="question_title">柯罗尼物流地产基金主要投资于标的基金CIF（Colony Industrial Fund）项下的优质物流地产投资组合。
+                  投资组合足够分散，覆盖全美16个州，总投资规模达3,900万平方英尺；</p>
+                </div>
+                <p class="answer_time">2017年12月29日</p>
+              </div>
+            </div>
+          </block>
+        </div>
+      </div>
+      <div class="project_documents">
+        <div class="doc_type_name">产品介绍文件</div>
+        <ul class="docs_list">
+          <li class="doc">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+          <li class="doc border_none">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+        </ul>
+        <div class="border_block"></div>
+        <div class="doc_type_name">投资者认购文件</div>
+        <div class="read_only">仅供阅读</div>
+        <ul class="docs_list">
+          <li class="doc">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+          <li class="doc border_none">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+        </ul>
+        <div class="read_only sign">签署文件</div>
+        <ul class="docs_list">
+          <li class="doc">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+          <li class="doc border_none">
+            <span class="doc_name">狮子山类固收基金1号产品计划书</span>
+            <img src="/images/icon_download1.png" class="download_icon"/>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -145,7 +238,7 @@ export default {
     return {
       bannerList: [
         // {id: 1, url: 'https://file.meixinglobal.com/media/20180703/409c2f20-1da7-476b-a7c0-9060b0da0cbc.mp4', type: 2},
-        {id: 2, url: 'https://doc.meixinglobal.com/docs/20180704/1530636659626/29/5.png', type: 1},
+        {id: 2, url: 'https://doc.meixinglobal.com/docs/20180704/1530636659626/29/5.png', type: 2},
         {id: 3, url: 'https://doc.meixinglobal.com/docs/20180704/1530636623485/30/4.jpg', type: 1},
         {id: 4, url: 'https://doc.meixinglobal.com/docs/20180704/1530636670707/26/6.jpg', type: 1}
       ],
@@ -159,13 +252,30 @@ export default {
         {name: '附近中学', value: 2},
         {name: '附近小学', value: 3}
       ],
-      selectedSchool: 1
+      houseTagList: [
+        {name: '图文特色', value: 1},
+        {name: '购房须知', value: 2},
+        {name: '项目资料', value: 3}
+      ],
+      selectedSchool: 1,
+      selectedHouse: 3,
+      current: 1,
+      type: 1
     }
   },
   methods: {
     changeSchoolTag (value) {
       this.selectedSchool = value
-    }
+    },
+    changeHouseTag (value) {
+      this.selectedHouse = value
+    },
+    changeCurrent (e) {
+      let index = e.target.current
+      this.type = this.bannerList[index].type
+      this.current = index + 1
+      console.log(this.type)
+    },
   },
   created () {
   }
@@ -178,12 +288,15 @@ export default {
     font-size: 24rpx;
     color: #555;
   }
+  .banner_box{
+    position: relative;
+  }
   swiper{
     height: 450rpx;
   }
-  swiper-item cover-image { 
+  cover-image { 
     position: absolute;
-    bottom: 20rpx;
+    bottom: 22rpx;
   }
   .banner_img{
     width: 100%;
@@ -203,7 +316,7 @@ export default {
   .banner_page{
     position: absolute;
     bottom: 20rpx;
-    right: 20rpx;
+    right: 30rpx;
     color: #fff;
     font-size: 28rpx;
   }
@@ -211,7 +324,12 @@ export default {
     width: 100%;
     height: 450rpx;
   }
-  
+  // .page_box{
+  //   width: 100%;
+  //   height: 450rpx;
+  //   position: relative;
+  //   top: 0;
+  // }
   .product_simple{
     background: #fff;
     padding-bottom: 35rpx;
@@ -245,6 +363,7 @@ export default {
     align-items: center;
     padding: 0 20rpx;
     margin-top: 45rpx;
+    // position: relative;
   }
   .amount{
     color: #306FF4;
@@ -422,5 +541,133 @@ export default {
     width: 454rpx;
     height: 296rpx;
     margin-bottom: 20rpx;
+  }
+  
+  .image_and_text{
+    background: #fff;
+  }
+  .img_text_tags{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 24rpx;
+    border-bottom: 1rpx solid #ddd;
+  }
+  .img_text_tag{
+    font-size: 28rpx;
+    color: #999;
+    padding: 0 8rpx 15rpx;
+    border-bottom: 4rpx solid transparent;
+  }
+  .img_text_tag_active{
+    font-size: 28rpx;
+    color: #306FF4;
+    padding: 0 8rpx 15rpx;
+    border-bottom: 4rpx solid #306FF4;
+  }
+  .text_detail{
+    font-size: 26rpx;
+    color: #666;
+    line-height: 48rpx;
+    padding: 40rpx 20rpx 30rpx;
+  }
+  .detail_img{
+    width: 100%;
+    height: 473rpx;
+    margin: 30rpx 0;
+  }
+
+  .purchase_process,.question{
+    padding: 20rpx 20rpx 25rpx;
+  }
+  .process_label,.question_label{
+    font-size: 28rpx;
+    color: #999;
+  }
+  .process_img{
+    width: 100%;
+    height: 379rpx;
+    margin: 30rpx 0 26rpx;
+    border: 1rpx solid #E7E7E7;
+  }
+  .img_title{
+    font-size: 28rpx;
+    color: #999;
+    text-align: center;
+  }
+  .border_block{
+    width: 100%;
+    height: 20rpx;
+    background: $backgroundColor;
+  }
+
+  .question_label{
+    margin-bottom: 10rpx;
+  }
+  .question_box{
+    display: flex;
+  }
+  .question_answer{
+    padding: 22rpx 0;
+    margin-bottom: 18rpx;
+  }
+  .question_icon{
+    width: 38rpx;
+    height: 41rpx;
+    vertical-align: middle;
+    margin-right: 20rpx;
+  }
+  .question_title{
+    flex: 1;
+    font-size: 26rpx;
+    line-height: 42rpx;
+  }
+  .answer_box{
+    font-size: 24rpx;
+    color: #787878;
+    line-height: 38rpx;
+    background: #F5F5F5;
+    padding: 20rpx;
+    margin-left: 55rpx;
+    margin-top: 10rpx;
+  }
+  .answer_time{
+    font-size: 20rpx;
+    color: #646464;
+    text-align: right;
+    margin-top: 10rpx;
+  }
+  .doc_type_name{
+    font-size: 26rpx;
+    color: #5A5A5A;
+    font-weight: bold;
+    line-height: 80rpx;
+    padding-left: 30rpx;
+    border-bottom: 1rpx solid #ddd;
+  }
+  .docs_list{
+    padding: 0 30rpx;
+  }
+  .doc{
+    height: 78rpx;
+    @include flex(space-between,center);
+    border-bottom: 1rpx dashed #ddd;
+  }
+  .doc_name{
+    color: #306FF4;
+  }
+  .download_icon{
+    width: 44rpx;
+    height: 38rpx;
+  }
+  .read_only{
+    font-size: 26rpx;
+    color: #999;
+    padding: 20rpx 30rpx 18rpx;
+  }
+  .sign{
+    border-top: 1rpx solid #ddd;
+  }
+  .border_none{
+    border: none
   }
 </style>
