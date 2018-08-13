@@ -29,7 +29,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -40,7 +40,13 @@
 				{
 					"id": -1,
 					"name": "房产详情",
-					"pathName": "pages/estate/product/product_detail/main"
+					"pathName": "pages/estate/product/product_detail/main",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "房产项目信息",
+					"pathName": "pages/estate/product/estate_information/main"
 				}
 			]
 		}

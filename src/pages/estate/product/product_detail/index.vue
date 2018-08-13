@@ -120,7 +120,7 @@
       <div class="common_top">
         <img src="/images/icon_bitmap.png" class="bitmap_icon"/>
         <span class="common_label">在售户型</span>
-        <img src="/images/icon_arrow_product.png" class="arrow_icon"/>
+        <!-- <img src="/images/icon_arrow_product.png" class="arrow_icon"/> -->
       </div>
       <div class="house_type">
         <scroll-view scroll-x>
