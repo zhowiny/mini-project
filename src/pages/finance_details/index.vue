@@ -1,40 +1,40 @@
 <template>
   <div class="container">
-    <wx-steps :active="active" :steps="steps"/>
+    <wx-steps :active="step" :steps="steps"/>
     <div class="order_info">
       <div class="order_info_title"><span></span>订单信息</div>
       <ul class="order_info_content">
         <li>
           <span>订单信息</span>
-          <span>123456789456</span>
+          <span>{{orderNumber}}</span>
         </li>
         <li>
           <span>产品名称</span>
-          <span>东南亚消费信贷基金</span>
+          <span>{{detail.product_name}}</span>
         </li>
         <li>
           <span>投资时间</span>
-          <span>2018-6-23 9:11</span>
+          <span>{{detail.created_at}}</span>
         </li>
         <li>
           <span>投资金额</span>
-          <span>$200,000.00</span>
+          <span>{{detail.invest_amount}}</span>
         </li>
         <li>
           <span>起息日</span>
-          <span>2017-7-16</span>
+          <span>{{detail.start_interest_day}}</span>
         </li>
         <li>
           <span>投资期限</span>
-          <span>12个月</span>
+          <span>{{detail.invest_term}}</span>
         </li>
         <li>
           <span>到期时间</span>
-          <span>2018-7-27</span>
+          <span>{{detail.end_sale_time}}</span>
         </li>
         <li>
           <span>收益率</span>
-          <span>预期8%</span>
+          <span>{{detail.return_rate}}</span>
         </li>
         <li>
           <span>收益返还方式</span>
@@ -44,19 +44,19 @@
     </div>
     <ul class="other">
       <li class="other_item" @click="toPage({url: '/pages/file_page/main', data: {orderId: 1}})">
-        <image mode="aspectFit" src="/images/icon_file.png" style="width: 50rpx;height:50rpx"></image>
+        <img mode="aspectFit" src="/images/icon_file.png" style="width: 50rpx;height:50rpx" />
         <span class="other_item_title">投资文件</span>
-        <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
+        <img mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx" />
       </li>
       <li class="other_item" @click="toPage({url: '/pages/order_investment_report/main', data: {orderId: 2}})">
-        <image mode="aspectFit" src="/images/icon_report1.png" style="width: 50rpx;height:50rpx"></image>
+        <img mode="aspectFit" src="/images/icon_report1.png" style="width: 50rpx;height:50rpx" />
         <span class="other_item_title">投资报告</span>
-        <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
+        <img mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"/>
       </li>
       <li class="other_item" @click="toPage({url: '/pages/order_reimbursement_record/main', data: {orderId: 3}})">
-        <image mode="aspectFit" src="/images/icon_record.png" style="width: 50rpx;height:50rpx"></image>
+        <img mode="aspectFit" src="/images/icon_record.png" style="width: 50rpx;height:50rpx"/>
         <span class="other_item_title">回款记录</span>
-        <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
+        <img mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"/>
       </li>
     </ul>
   </div>
@@ -64,22 +64,59 @@
 
 <script>
   import wxSteps from '@/components/steps'
+
   export default {
     data () {
       return {
         title: '金融订单详情',
-        active: 3,
+        orderNumber: '',
+        step: 0,
         steps: [
-          {title: '预约中', time: '2017-1-21 9:00'},
-          {title: '申请合同', time: '2017-1-21 9:00'},
-          {title: '待入金', time: '2017-1-21 9:00'},
-          {title: '已入金', time: '2017-1-21 9:00'},
+          {title: '预约中'},
+          {title: '申请合同'},
+          {title: '待入金'},
+          {title: '已入金'},
         ],
+        detail: {},
+        userInfo: this.$config.getUserInfo(),
       }
     },
-    created () {
+    computed: {
+    },
+    onLoad () {
+      this.orderNumber = this.$mp.query.orderNumber
+      this.getDetail()
     },
     methods: {
+      async getDetail () {
+        try {
+          this.detail = await this.$http.get('/big_bend/clb/order/detail_of_advisor', {
+            unitive_advisor_id: this.userInfo.userId,
+            order_number: this.orderNumber,
+            timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+          })
+          this.detail.end_sale_time = this.format(new Date(this.detail.end_sale_time), 'yyyy-MM-dd')
+          switch (this.detail.order_status_desc) {
+            case '预约':
+              this.step = 1
+              break
+            case '合同申请':
+              this.step = 2
+              break
+            case '待入金':
+              this.step = 3
+              break
+            case '已入金':
+              this.step = 4
+              break
+            default:
+              this.step = 0
+              break
+          }
+        } catch (e) {
+          //
+        }
+      }
     },
     components: {
       wxSteps
@@ -96,31 +133,32 @@
     padding: 0 $middle-space;
     background: #fff;
     font-size: 30px;
-&_title {
+    &_title {
       @include flex(flex-start);
       font-size: 32px;
-height: 80px;
-padding: $middle-space 0;
+      height: 80px;
+      padding: $middle-space 0;
       border-bottom: 1px solid $borderColor;
       span {
         display: inline-block;
         height: 100%;
         width: 8px;
-background: $mainColor;
+        background: $mainColor;
         margin-right: 10px;
-}
+      }
     }
     &_content {
       padding: $small-space 0;
-      flex:1;
+      flex: 1;
       @include flex(space-between, space-between);
-      flex-direction:column;
+      flex-direction: column;
       li {
         @include flex(space-between);
         padding: $small-space 0;
       }
     }
   }
+
   .other {
     margin-top: $middle-space;
     background: #fff;
@@ -134,7 +172,7 @@ background: $mainColor;
         flex: 1;
         padding: $middle-space;
         font-size: 30px;
-}
+      }
     }
   }
 </style>

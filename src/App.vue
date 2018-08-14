@@ -8,6 +8,7 @@ export default {
     wx.setStorageSync('logs', logs)
     // todo 登录获取openid
     // this.$auth.login()
+    this.$config.setUserInfo({userId: 1688})
   },
   onShow () {
     // `this` 指向 vm 实例

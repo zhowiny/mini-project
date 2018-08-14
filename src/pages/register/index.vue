@@ -21,10 +21,6 @@
       <div class="fields_row">
         <mx-select :data="items" valueKey="value" @change="onSelect" v-model="type" label="meaning" placeholder="选择投资人类型"/>
       </div>
-      <!--<wx-checker defaultClass="protocol" v-model="protocol" @checker-change="protocolChange">-->
-        <!--<p>我已阅读并同意</p>-->
-        <!---->
-      <!--</wx-checker>-->
 
       <div class="button">
         <mx-button text="立即开户" @click="toPage('/pages/authentication/main')" round type="primary"/>
@@ -97,13 +93,12 @@ export default {
       index: 0,
     }
   },
+  async created () {
+  },
   methods: {
     bindPickerChange ({mp}) {
       console.log(mp.detail.value)
       this.index = mp.detail.value
-    },
-    protocolChange (e) {
-      console.log(e)
     },
     handleCheckboxChange (e) {
       let value = e.mp.detail
