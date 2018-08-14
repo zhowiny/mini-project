@@ -1,11 +1,12 @@
 import qs from 'qs'
-import {API_DOMAIN, getTokenSecret} from './config'
+import { API_DOMAIN, getTokenSecret, APPID } from './config'
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 
 fly.interceptors.request.use((config, promise) => {
   // 给所有请求添加自定义header
   // config.headers['X-Tag'] = 'flyio'
+  config.headers['app_id'] = APPID
   if (!~config.url.indexOf('?') && !~config.url.indexOf('access_token')) {
     let params = {
       sessionId: getTokenSecret().secret,

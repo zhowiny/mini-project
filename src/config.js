@@ -3,8 +3,10 @@
  **/
 module.exports = {
   'pages': [
-    // 'pages/admin_details_page/main', //产品 资官方详情
     'pages/finance_details_page/main', //金融 产品详情
+    'pages/admin_team_page/main', //产品 资官方管理团队页
+    'pages/admin_details_page/main', //产品 资官方详情
+
     'pages/index/main', // 首页 我的在投
     'pages/account_chart/main', // 账号总览
     'pages/finance/main', // 金融投资列表

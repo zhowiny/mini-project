@@ -1,4 +1,5 @@
-const API_DOMAIN = 'https://www.fortunefed.com'
+// const API_DOMAIN = 'https://www.fortunefed.com'
+const API_DOMAIN = 'https://test-api-geteway.meixincn.com'
 const APPID = 'wx852f55ac0db71552' // mine
 /** 手机品牌 **/
 let dBrand = ''

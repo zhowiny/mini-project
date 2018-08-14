@@ -3,47 +3,47 @@
     <div class="finance">
       <div class="finance_info">
         <figure class="finance_info_basic">
-          <p class="finance_info_basic_logo"> <img class="finance_info_basic_logo" mode="scaleToFill" src="/images/test.png" alt=""> </p>
-          <p class="finance_info_basic_name">狮子山固收基金一号狮狮子收</p>
+          <p class="finance_info_basic_logo"> <img class="finance_info_basic_logo" mode="scaleToFill" :src="product.logo" alt=""> </p>
+          <p class="finance_info_basic_name">{{product.name}}</p>
         </figure>
-        <div class="finance_info_read">
+        <div class="finance_info_read" @click="mustRead">
           <p class="finance_info_read_icon"> <img class="finance_info_read_icon" mode="aspectFit" src="/images/icon_bell.png" alt=""> </p>
           <p class="finance_info_read_text"> 投资必读 </p>
         </div>
       </div>
       <div class="finance_attr">
         <div class="finance_attr_item">
-          <p class="finance_attr_item_value"> 11+8.8% </p>
+          <p class="finance_attr_item_value"> {{product.return_rate}} </p>
           <p class="finance_attr_item_label"> 预计年化 </p>
         </div>
         <div class="finance_attr_item" style="border-left: 1px solid #eeeeee;border-right: 1px solid #eeeeee;">
-          <p class="finance_attr_item_value"> 8.8% </p>
+          <p class="finance_attr_item_value"> {{product.minimum_invest_amount}} </p>
           <p class="finance_attr_item_label"> 投资金额 </p>
         </div>
         <div class="finance_attr_item">
-          <p class="finance_attr_item_value"> 8.8% </p>
-          <p class="finance_attr_item_label"> 佣金比例 </p>
+          <p class="finance_attr_item_value"> {{product.invest_term}} </p>
+          <p class="finance_attr_item_label"> 投资期限 </p>
         </div>
       </div>
       <div class="finance_admin">
-        <div class="finance_admin_item">
+        <div class="finance_admin_item" @click="downloadProductBook">
           <p class="finance_admin_item_icon"> <img class="finance_admin_item_icon" mode="scaleToFill" src="/images/icon_productbook.png" alt=""> </p>
           <p class="finance_admin_item_text"> 下载产品书 </p>
         </div>
-        <div class="finance_admin_item">
+        <div class="finance_admin_item"  @click="toPage({url: '/pages/admin_details_page/main', data: {management_id: product.management_id}})">
           <p class="finance_admin_item_icon"> <img class="finance_admin_item_icon" mode="scaleToFill" src="/images/icon_admin.png" alt=""> </p>
           <p class="finance_admin_item_text"> Colony Northstar 克罗尼北极星 </p>
         </div>
       </div>
-      <div class="finance_points">
+      <div class="finance_points" v-if="isShowLight">
         <div class="finance_points_title">
-          <p class="finance_points_title_name"> 投资亮点投资亮点投资亮点投资亮点投资亮点投资亮点投资亮点投资亮点投资亮点投资亮点 </p>
-          <div class="finance_points_title_copy">
+          <p class="finance_points_title_name"> {{product.highlights_title}} </p>
+          <div class="finance_points_title_copy" @click="copy">
             <p class="finance_points_title_copy_icon"> <img class="finance_points_title_copy_icon" mode="scaleToFill" src="/images/icon_copy.png" alt=""> </p>
             <p class="finance_points_title_copy_text"> 复制 </p>
           </div>
         </div>
-        <div class="finance_points_content">  </div>
+        <div class="finance_points_content"> {{product.highlights_content}} </div>
       </div>
       <div class="finance_other">
         <div class="finance_other_tabs">
@@ -55,66 +55,90 @@
         <div class="finance_other_content">
 
           <div class="finance_other_content_information" v-if="tabIndex==0">
-            <div class="finance_other_content_information_item">
-              <p class="finance_other_content_information_item_pic"> <img class="finance_other_content_information_item_pic" mode="scaleToFill" src="/images/icon_copy.png" alt=""> </p>
+            <div class="finance_other_content_information_item" v-for="(item, index) in productArticle" :key="index">
+              <p class="finance_other_content_information_item_pic"> <img class="finance_other_content_information_item_pic" mode="scaleToFill" :src="item.head_img" alt=""> </p>
               <div class="finance_other_content_information_item_main">
-                <p class="finance_other_content_information_item_main_name"> 方式可能分开苏丹诺夫肯定是能否看到你发粉嫩的少女风 </p>
-                <p class="finance_other_content_information_item_main_other"> <span> 2天前 </span>|<span>123阅读量</span> </p>
-              </div>
-            </div>
-            <div class="finance_other_content_information_item">
-              <p class="finance_other_content_information_item_pic"> <img class="finance_other_content_information_item_pic" mode="scaleToFill" src="/images/icon_copy.png" alt=""> </p>
-              <div class="finance_other_content_information_item_main">
-                <p class="finance_other_content_information_item_main_name"> 方式可能分开苏丹诺夫肯定是能否看到你发粉嫩的少女风 </p>
-                <p class="finance_other_content_information_item_main_other"> <span> 2天前 </span>|<span>123阅读量</span> </p>
+                <p class="finance_other_content_information_item_main_name"> {{item.title}} </p>
+                <p class="finance_other_content_information_item_main_other"> <span> 2天前 </span>|<span>{{item.pv}} 阅读量</span> </p>
               </div>
             </div>
           </div>
 
           <div class="finance_other_content_part" v-if="tabIndex==1">
+
             <div class="finance_other_content_part_item">
               <p class="finance_other_content_part_item_label"> 产品名称 </p>
-              <p class="finance_other_content_part_item_value"> skdlasdlsa人寿保险 </p>
+              <p class="finance_other_content_part_item_value"> {{product.name}} </p>
             </div>
             <div class="finance_other_content_part_item">
-              <p class="finance_other_content_part_item_label"> 产品名称 </p>
-              <p class="finance_other_content_part_item_value"> skdlasdlsa人寿保险 </p>
+              <p class="finance_other_content_part_item_label"> 产品期限 </p>
+              <p class="finance_other_content_part_item_value"> {{product.invest_term}} </p>
             </div>
             <div class="finance_other_content_part_item">
-              <p class="finance_other_content_part_item_label"> 产品名称 </p>
-              <p class="finance_other_content_part_item_value"> skdlasdlsa人寿保险 </p>
+              <p class="finance_other_content_part_item_label"> 产品起息日 </p>
+              <p class="finance_other_content_part_item_value"> {{product.start_interest_day}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 托管银行 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.custodian_bank}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 审计机构 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.audit_authority}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 申购赎回 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.redeem_time}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 投资标的 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.invest_object}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 费用 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.fee}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 合格投资人 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.qualified_investor}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 行政管理 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.administration}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 派息方式 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.dividend_way}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 基金经理 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.fund_manager}} </p>
+            </div>
+            <div class="finance_other_content_part_item">
+              <p class="finance_other_content_part_item_label"> 其他 </p>
+              <p class="finance_other_content_part_item_value"> {{productInfoBasic.supplement}} </p>
+            </div>
+
             </div>
           </div>
 
           <div class="finance_other_content_process" v-if="tabIndex==2">
-            <div  class="finance_other_content_process_item">
-              <p class="finance_other_content_process_item_pic"> <img class="finance_other_content_process_item_pic" mode="scaleToFill" src="/images/icon_copy.png" alt=""> </p>
-              <p class="finance_other_content_process_item_text"> 1111 </p>
+            <div  class="finance_other_content_process_item" v-for="(item, index) in salesProcess" :key="index">
+              <p class="finance_other_content_process_item_pic"> <img class="finance_other_content_process_item_pic" mode="scaleToFill" :src="item.url" alt=""> </p>
+              <p class="finance_other_content_process_item_text"> {{item.name}} </p>
             </div>
             <div class="finance_problem">
               <div class="finance_problem_title"> <p class="finance_problem_title_text"> 常见问题 </p> </div>
               <div class="finance_problem_content">
-                <div class="finance_other_content_problem_item">
+                <div class="finance_other_content_problem_item" v-for="(item, index) in questionList" :key="index">
                   <div class="finance_other_content_problem_item_question">
                     <p class="finance_other_content_problem_item_question_icon"> <img class="finance_other_content_problem_item_question_icon" mode="scaleToFill" src="/images/icon_question.png" alt=""> </p>
-                    <p class="finance_other_content_problem_item_question_text"> 萨博的撒比的就是不待见撒都不叫撒点吧 </p>
+                    <p class="finance_other_content_problem_item_question_text"> {{item.question}} </p>
                   </div>
                   <div class="finance_other_content_problem_item_answer">
                     <p class="finance_other_content_problem_item_answer_icon"> <img class="finance_other_content_problem_item_answer_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""> </p>
-                    <p class="finance_other_content_problem_item_answer_text"> 萨博的撒比的就是不待见撒都不叫撒点吧萨博的撒比的就是不待见撒都不叫撒点吧萨博的撒待见撒都不叫撒点吧
-                      <time class="finance_other_content_problem_item_answer_text_time"> 2016-21-21 </time>
-                    </p>
-                  </div>
-                </div>
-                <div class="finance_other_content_problem_item">
-                  <div class="finance_other_content_problem_item_question">
-                    <p class="finance_other_content_problem_item_question_icon"> <img class="finance_other_content_problem_item_question_icon" mode="scaleToFill" src="/images/icon_question.png" alt=""> </p>
-                    <p class="finance_other_content_problem_item_question_text"> 萨博的撒比的就是不待见撒都不叫撒点吧 </p>
-                  </div>
-                  <div class="finance_other_content_problem_item_answer">
-                    <p class="finance_other_content_problem_item_answer_icon"> <img class="finance_other_content_problem_item_answer_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""> </p>
-                    <p class="finance_other_content_problem_item_answer_text"> 萨博的撒比的就是不待见撒都不叫撒点吧萨博的撒比的就是不待见撒都不叫撒点吧萨博的撒待见撒都不叫撒点吧
-                      <time class="finance_other_content_problem_item_answer_text_time"> 2016-21-21 </time>
+                    <p class="finance_other_content_problem_item_answer_text"> {{item.answer}}
+                      <time class="finance_other_content_problem_item_answer_text_time"> {{item.create_at}} </time>
                     </p>
                   </div>
                 </div>
@@ -125,16 +149,8 @@
             <div class="finance_other_content_file_item">
               <div class="finance_other_content_file_item_title"> 产品介绍文件 </div>
               <div class="finance_other_content_file_item_content">
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
+                <div class="finance_other_content_file_item_content_item" v-for="(item, index) in introductionDocuments" :key="index">
+                  <p class="finance_other_content_file_item_content_item_text"> {{item.document_name}} </p>
                   <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
                 </div>
               </div>
@@ -143,31 +159,15 @@
               <div class="finance_other_content_file_item_title"> 投资者认购文件 </div>
               <div class="finance_other_content_file_item_content">
                 <p class="finance_other_content_file_item_content_title"> 仅供阅读 </p>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
+                <div class="finance_other_content_file_item_content_item" v-for="(item, index) in readDocuments" :key="index">
+                  <p class="finance_other_content_file_item_content_item_text"> {{item.document_name}} </p>
                   <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
                 </div>
               </div>
               <div class="finance_other_content_file_item_content">
                 <p class="finance_other_content_file_item_content_title"> 签署文件 </p>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
-                  <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
-                </div>
-                <div class="finance_other_content_file_item_content_item">
-                  <p class="finance_other_content_file_item_content_item_text"> 213213123213213123213213123213213123213213123213213123 </p>
+                <div class="finance_other_content_file_item_content_item" v-for="(item, index) in signDocuments" :key="index">
+                  <p class="finance_other_content_file_item_content_item_text"> {{item.document_name}} </p>
                   <p class="finance_other_content_file_item_content_item_icon"> <img class="finance_other_content_file_item_content_item_icon" mode="scaleToFill" src="/images/icon_answer.png" alt=""></p>
                 </div>
               </div>
@@ -187,18 +187,107 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data () {
       return {
         title: '金融产品',
         tabIndex: 0,
+        productId: '',
+        productType: '',
       }
     },
     created () {
 
     },
+    mounted () {
+      this.productId = this.$root.$mp.query.product_id || 2457998
+      this.productType = this.$root.$mp.query.product_type || 1
+      console.log(this.$store)
+      this.$store.dispatch('getProductInfo', {
+        id: this.productId,
+        type: this.productType
+      })
+      this.$store.dispatch('getProductArticle', {
+        id: this.productId,
+        type: this.productType
+      })
+    },
     methods: {
+      mustRead () {
+        wx.showLoading({
+          title: '加载中',
+        })
+        wx.downloadFile({
+          url: 'https://doc.meixinglobal.com/docs/20180208/1518061734588/36/Information Memorandum.pdf',
+          success: function (res) {
+            if (res.statusCode === 200) {
+              wx.hideLoading()
+              console.log(res)
+              var filePath = res.tempFilePath
+              wx.openDocument({
+                filePath: filePath,
+                success: function (res) {
+                  console.log(res)
+                  console.log('打开文档成功')
+                }
+              })
+            }
+          }
+        })
+      },
+      downloadProductBook () {
+        wx.showLoading({
+          title: '加载中',
+        })
+        wx.downloadFile({
+          url: 'https://doc.meixinglobal.com/docs/20180208/1518061316907/30/W8.pdf',
+          success: function (res) {
+            if (res.statusCode === 200) {
+              wx.hideLoading()
+              console.log(res)
+              var filePath = res.tempFilePath
+              wx.openDocument({
+                filePath: filePath,
+                success: function (res) {
+                  console.log(res)
+                  console.log('打开文档成功')
+                }
+              })
+            }
+          }
+        })
+      },
+      goToAdmin () {
 
+      },
+      copy () {
+        wx.setClipboardData({
+          data: this.copyText,
+          success: function (res) {
+            wx.getClipboardData({
+              success: function (res) {
+                console.log(res) // data
+              }
+            })
+          }
+        })
+      },
+
+    },
+    computed: {
+      ...mapGetters({
+        product: 'productInfo',
+        productInfoBasic: 'productInfoBasic',
+        isShowLight: 'isShowLight',
+        productArticle: 'productArticle',
+        questionList: 'questionList',
+        salesProcess: 'salesProcess',
+        introductionDocuments: 'introductionDocuments',
+        readDocuments: 'readDocuments',
+        signDocuments: 'signDocuments',
+        copyText: 'copyText',
+      })
     },
     components: {
     },
@@ -333,7 +422,7 @@
         }
       }
       &_content{
-        margin-bottom: 120rpx;
+        margin-bottom: 20rpx;
         &_information{
           margin-top: 20rpx;
           &_item{
