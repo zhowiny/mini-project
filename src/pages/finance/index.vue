@@ -26,7 +26,7 @@
       </div>
     </div>
     <ul class="product">
-      <li class="product_item" v-for="(item, index) in dataList" :key="index" @click="toPage({url: '/pages/finance_details/main', data: {orderNumber: item.order_number}})">
+      <li class="product_item" v-for="(item, index) in orderList" :key="index" @click="toPage({url: '/pages/finance_details/main', data: {orderNumber: item.order_number}})">
         <h2 class="product_item_title">{{item.finance_name}}</h2>
         <p>
           <span class="product_item_time">{{item.created_at}}</span>
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+  import {mapGetters, mapActions} from 'vuex'
   export default {
     components: {
     },
@@ -59,29 +60,26 @@
       return {
         title: '金融资产',
         activedIndex: 0,
-        dataList: [],
-        userInfo: this.$config.getUserInfo()
       }
+    },
+    computed: {
+      ...mapGetters(['orderList', 'userInfo']),
     },
     onLoad () {
       this.getData()
     },
     methods: {
-      async getData (status = 'all') {
-        try {
-          let result = await this.$http.get('/big_bend/clb/order/query_list', {
-            unitive_advisor_id: this.userInfo.userId,
-            order_type: 1,
-            order_status: status,
-            order_number: '',
-            time_begin: this.format(new Date(new Date().setMonth(0, 1)), 'yyyy-MM-dd'),
-            time_end: this.format(new Date(), 'yyyy-MM-dd'),
-            timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-          })
-          this.dataList = result.global_order_resp_vos
-        } catch (e) {
-          //
-        }
+      ...mapActions(['getOrderList']),
+      getData (status = 'all') {
+        this.getOrderList({
+          unitive_advisor_id: this.userInfo.userId,
+          order_type: 1,
+          order_status: status,
+          order_number: '',
+          time_begin: this.format(new Date(new Date().setMonth(0, 1)), 'yyyy-MM-dd'),
+          time_end: this.format(new Date(), 'yyyy-MM-dd'),
+          timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+        })
       },
       filterOrder (status, index) {
         this.activedIndex = index

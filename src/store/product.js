@@ -106,7 +106,7 @@ export default{
           product_id: product.id,
           product_type: product.type
         })
-        commit('setProductInfo', data.body)
+        commit('setProductInfo', data)
       } catch (e) {
         throw new Error(e)
       }
@@ -118,7 +118,7 @@ export default{
           product_id: product.id,
           product_type: product.type
         })
-        commit('setProductArticle', data.body)
+        commit('setProductArticle', data)
       } catch (e) {
         throw new Error(e)
       }
@@ -129,7 +129,7 @@ export default{
         let data = await fly.get('/mini/management/detail', {
           management_id: product.management_id,
         })
-        commit('setProductAdmin', data.body)
+        commit('setProductAdmin', data)
       } catch (e) {
         throw new Error(e)
       }
@@ -139,7 +139,7 @@ export default{
         let data = await fly.get('/mini/management/team_list', {
           management_id: product.management_id,
         })
-        commit('setProductAdminTeamDetails', data.body)
+        commit('setProductAdminTeamDetails', data)
       } catch (e) {
         throw new Error(e)
       }

@@ -175,13 +175,10 @@
           </div>
 
         </div>
-      </div>
-
-      <div class="finance_footer">
-        <div class="finance_footer_adviser"> 联系理财师 </div>
-        <div class="finance_footer_invest"> 立即投资 </div>
-      </div>
-
+    </div>
+    <div class="finance_footer">
+      <div class="finance_footer_adviser"> 联系理财师 </div>
+      <div class="finance_footer_invest"> 立即投资 </div>
     </div>
   </div>
 </template>

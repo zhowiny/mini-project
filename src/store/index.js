@@ -3,29 +3,33 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import product from './product'
+import order from './order'
+import * as $config from '../utils/const'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
     product,
+    order,
   },
 
   state: {
     userInfo: {},
-    count: 0,
+  },
+  getters: {
+    userInfo: state => state.userInfo
   },
   mutations: {
     setUserInfo: (state, payload) => {
       state.userInfo = payload
     },
-    increment: (state) => {
-      const obj = state
-      obj.count += 1
-    },
-    decrement: (state) => {
-      const obj = state
-      obj.count -= 1
+  },
+  actions: {
+    getUserInfo: ({commit}, params) => {
+      let userInfo = {userId: 1688}
+      $config.setUserInfo(userInfo)
+      commit('setUserInfo', userInfo)
     }
   }
 })

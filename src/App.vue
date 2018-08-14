@@ -1,5 +1,5 @@
 <script>
-
+import {mapActions} from 'vuex'
 export default {
   async created () {
     // 调用API从本地缓存中获取数据
@@ -8,7 +8,10 @@ export default {
     wx.setStorageSync('logs', logs)
     // todo 登录获取openid
     // this.$auth.login()
-    this.$config.setUserInfo({userId: 1688})
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['getUserInfo'])
   },
   onShow () {
     // `this` 指向 vm 实例

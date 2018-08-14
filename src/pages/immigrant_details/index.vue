@@ -61,6 +61,7 @@
 
 <script>
   import wxSteps from '@/components/steps'
+  import {mapGetters, mapActions} from 'vuex'
   export default {
     data () {
       return {
@@ -72,44 +73,42 @@
           {title: '待入金'},
           {title: '已入金'},
         ],
-        userInfo: this.$config.getUserInfo(),
-        detail: {},
       }
     },
-    onLoad () {
+    computed: {
+      ...mapGetters({
+        detail: 'orderDetail',
+        userInfo: 'userInfo'
+      }),
+    },
+    async onLoad () {
       this.orderNumber = this.$mp.query.orderNumber
-      this.getDetail()
+      await this.getOrderDetail({
+        unitive_advisor_id: this.userInfo.userId,
+        order_number: this.orderNumber,
+        timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+      })
+      this.detail.end_sale_time = this.format(new Date(this.detail.end_sale_time), 'yyyy-MM-dd')
+      switch (this.detail.order_status_desc) {
+        case '预约':
+          this.step = 1
+          break
+        case '合同申请':
+          this.step = 2
+          break
+        case '待入金':
+          this.step = 3
+          break
+        case '已入金':
+          this.step = 4
+          break
+        default:
+          this.step = 0
+          break
+      }
     },
     methods: {
-      async getDetail () {
-        try {
-          this.detail = await this.$http.get('/big_bend/clb/order/detail_of_advisor', {
-            unitive_advisor_id: this.userInfo.userId,
-            order_number: this.orderNumber,
-            timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-          })
-          this.detail.end_sale_time = this.format(new Date(this.detail.end_sale_time), 'yyyy-MM-dd')
-          switch (this.detail.order_status_desc) {
-            case '预约':
-              this.step = 1
-              break
-            case '合同申请':
-              this.step = 2
-              break
-            case '待入金':
-              this.step = 3
-              break
-            case '已入金':
-              this.step = 4
-              break
-            default:
-              this.step = 0
-              break
-          }
-        } catch (e) {
-          //
-        }
-      }
+      ...mapActions(['getOrderDetail']),
     },
     components: {
       wxSteps
