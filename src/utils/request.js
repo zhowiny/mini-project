@@ -2,13 +2,14 @@
 import qs from 'qs'
 import { KEY } from './const'
 import md5 from 'blueimp-md5'
-import {API_DOMAIN, getTokenSecret} from './const'
+import {API_DOMAIN, getTokenSecret, APPID} from './const'
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 
 fly.interceptors.request.use((config, promise) => {
   // 给所有请求添加自定义header
   // config.headers['X-Tag'] = 'flyio'
+  config.headers['app_id'] = APPID
   let md5str = Object.values(config.body).concat(KEY).join('&')
   Object.assign(config.body, {sign: md5(md5str)})
   wx.showLoading({
