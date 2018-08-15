@@ -2,20 +2,20 @@
   <div class="container">
     <div class="banner_box">
       <swiper autoplay @change="changeCurrent">
-        <block v-for="(item,index) in bannerList" :key="index">
+        <block v-for="(item,index) in detail.images" :key="index">
           <swiper-item>
-            <img :src="item.url" class="banner_img"/>
+            <img :src="item" class="banner_img"/>
             <!-- <video :src="item.url" class="banner_video" v-if="item.type == 2"></video> -->
           </swiper-item>
         </block>
       </swiper>
       <cover-image src="/images/icon_video.png" v-if="type == 2" class="video_icon"/>
       <cover-image src="/images/icon_pic.png" class="pic_icon"/>
-      <div class="banner_page">{{current}}/{{bannerList.length}}</div>
+      <!-- <div class="banner_page">{{current}}/{{length}}</div> -->
     </div>
     
     <div class="product_simple">
-      <P class="product_title">慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15慕司国际公馆ATMOZ Ladprao 15</P>
+      <P class="product_title">{{detail.name}}</P>
       <div class="product_address">
         <img src="/images/icon_map.png" class="map_icon" />
         <span>泰国 · 曼谷</span>
@@ -190,7 +190,7 @@
           </block>
         </div>
       </div>
-      <div class="project_documents">
+      <div class="project_documents" v-if="selectedHouse == 3">
         <div class="doc_type_name">产品介绍文件</div>
         <ul class="docs_list">
           <li class="doc">
@@ -260,7 +260,10 @@ export default {
       selectedSchool: 1,
       selectedHouse: 3,
       current: 1,
-      type: 1
+      type: 1,
+      product_id: '',
+      detail: {},
+      totleLength: 0
     }
   },
   methods: {
@@ -275,8 +278,20 @@ export default {
       this.type = this.bannerList[index].type
       this.current = index + 1
     },
+    getEstateDetail (id) {
+      this.$http.get('/mini/finance/detail', {product_id: id, product_type: 2}).then((res) => {
+        console.log(res)
+        this.detail = res.body
+        // this.totleLength = res.body.images.length
+      })
+    }
   },
   created () {
+  },
+  mounted () {
+    let id = this.$root.$mp.query.product_id
+    this.product_id = id
+    this.getEstateDetail(id)
   }
 }
 </script>

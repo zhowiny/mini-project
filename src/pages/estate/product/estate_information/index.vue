@@ -69,7 +69,6 @@ export default {
     padding: 0 20rpx;
   }
   .estate_option{
-    // height: 88px;
     @include flex(space-between,flex-start);
     font-size: 26px;
     border-bottom: 1rpx solid #e6e6e6;
@@ -77,7 +76,6 @@ export default {
   }
   .option_name{
     color: #555;
-    // line-height: 88px;
   }
   .option_data{
     color: #969696;

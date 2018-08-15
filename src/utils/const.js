@@ -1,4 +1,4 @@
-const API_DOMAIN = 'https://www.fortunefed.com'
+const API_DOMAIN = 'https://test-api-gateway.meixincn.com/'
 const APPID = 'wxcd7c5762adbd3cf5' // meixin－c
 /** 手机品牌 **/
 let dBrand = ''
