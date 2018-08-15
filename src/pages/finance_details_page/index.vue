@@ -65,7 +65,6 @@
           </div>
 
           <div class="finance_other_content_part" v-if="tabIndex==1">
-
             <div class="finance_other_content_part_item">
               <p class="finance_other_content_part_item_label"> 产品名称 </p>
               <p class="finance_other_content_part_item_value"> {{product.name}} </p>
@@ -118,7 +117,6 @@
               <p class="finance_other_content_part_item_label"> 其他 </p>
               <p class="finance_other_content_part_item_value"> {{productInfoBasic.supplement}} </p>
             </div>
-
             </div>
           </div>
 
@@ -173,457 +171,453 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
       <div class="finance_footer">
         <div class="finance_footer_adviser"> 联系理财师 </div>
         <div class="finance_footer_invest"> 立即投资 </div>
       </div>
-
-    </div>
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  export default {
-    data () {
-      return {
-        title: '金融产品',
-        tabIndex: 0,
-        productId: '',
-        productType: '',
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      title: "金融产品",
+      tabIndex: 0,
+      productId: "",
+      productType: ""
+    };
+  },
+  created() {},
+  mounted() {
+    this.productId = this.$root.$mp.query.product_id || 2485652;
+    this.productType = this.$root.$mp.query.product_type || 1;
+    this.$store.dispatch("getProductInfo", {
+      id: this.productId,
+      type: this.productType
+    });
+    this.$store.dispatch("getProductArticle", {
+      id: this.productId,
+      type: this.productType
+    });
+  },
+  methods: {
+    mustRead() {
+      if (
+        Object.prototype.toString.call(this.mustReadDoc) === "[object Array]" &&
+        this.mustReadDoc.length > 0
+      ) {
+        console.log(this.mustReadDoc[0].document_url);
+        wx.showLoading({
+          title: "加载中"
+        });
+        wx.downloadFile({
+          url: this.mustReadDoc[0].document_url,
+          success: function(res) {
+            if (res.statusCode === 200) {
+              wx.hideLoading();
+              console.log(res);
+              var filePath = res.tempFilePath;
+              wx.openDocument({
+                filePath: filePath,
+                success: function(res) {
+                  console.log(res);
+                  console.log("打开文档成功");
+                }
+              });
+            }
+          }
+        });
+      } else {
+        wx.showToast({
+          title: "暂无文件",
+          icon: "none",
+          duration: 2000
+        });
       }
     },
-    created () {
-
-    },
-    mounted () {
-      this.productId = this.$root.$mp.query.product_id || 2485652
-      this.productType = this.$root.$mp.query.product_type || 1
-      this.$store.dispatch('getProductInfo', {
-        id: this.productId,
-        type: this.productType
-      })
-      this.$store.dispatch('getProductArticle', {
-        id: this.productId,
-        type: this.productType
-      })
-    },
-    methods: {
-      mustRead () {
-        if (Object.prototype.toString.call(this.mustReadDoc) === '[object Array]' && this.mustReadDoc.length > 0) {
-          console.log(this.mustReadDoc[0].document_url)
-          wx.showLoading({
-            title: '加载中',
-          })
-          wx.downloadFile({
-            url: this.mustReadDoc[0].document_url,
-            success: function (res) {
-              if (res.statusCode === 200) {
-                wx.hideLoading()
-                console.log(res)
-                var filePath = res.tempFilePath
-                wx.openDocument({
-                  filePath: filePath,
-                  success: function (res) {
-                    console.log(res)
-                    console.log('打开文档成功')
-                  }
-                })
-              }
+    downloadProductBook() {
+      if (
+        Object.prototype.toString.call(this.productBook) === "[object Array]" &&
+        this.productBook.length > 0
+      ) {
+        console.log(this.productBook[0].document_url);
+        wx.showLoading({
+          title: "加载中"
+        });
+        wx.downloadFile({
+          url: this.productBook[0].document_url,
+          success: function(res) {
+            if (res.statusCode === 200) {
+              wx.hideLoading();
+              console.log(res);
+              var filePath = res.tempFilePath;
+              wx.openDocument({
+                filePath: filePath,
+                success: function(res) {
+                  console.log(res);
+                  console.log("打开文档成功");
+                }
+              });
             }
-          })
-        } else {
-          wx.showToast({
-            title: '暂无文件',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      },
-      downloadProductBook () {
-        if (Object.prototype.toString.call(this.productBook) === '[object Array]' && this.productBook.length > 0) {
-          console.log(this.productBook[0].document_url)
-          wx.showLoading({
-            title: '加载中',
-          })
-          wx.downloadFile({
-            url: this.productBook[0].document_url,
-            success: function (res) {
-              if (res.statusCode === 200) {
-                wx.hideLoading()
-                console.log(res)
-                var filePath = res.tempFilePath
-                wx.openDocument({
-                  filePath: filePath,
-                  success: function (res) {
-                    console.log(res)
-                    console.log('打开文档成功')
-                  }
-                })
-              }
-            }
-          })
-        } else {
-          wx.showToast({
-            title: '暂无文件',
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      },
-      copy () {
-        wx.setClipboardData({
-          data: this.copyText,
-          success: function (res) {
-            wx.getClipboardData({
-              success: function (res) {
-                console.log(res) // data
-              }
-            })
           }
-        })
-      },
-
+        });
+      } else {
+        wx.showToast({
+          title: "暂无文件",
+          icon: "none",
+          duration: 2000
+        });
+      }
     },
-    computed: {
-      ...mapGetters({
-        product: 'productInfo',
-        mustReadDoc: 'mustReadDoc',
-        productBook: 'productBook',
-        productInfoBasic: 'productInfoBasic',
-        isShowLight: 'isShowLight',
-        productArticle: 'productArticle',
-        questionList: 'questionList',
-        salesProcess: 'salesProcess',
-        introductionDocuments: 'introductionDocuments',
-        readDocuments: 'readDocuments',
-        signDocuments: 'signDocuments',
-        copyText: 'copyText',
-      })
-    },
-    components: {
-    },
-  }
+    copy() {
+      wx.setClipboardData({
+        data: this.copyText,
+        success: function(res) {
+          wx.getClipboardData({
+            success: function(res) {
+              console.log(res); // data
+            }
+          });
+        }
+      });
+    }
+  },
+  computed: {
+    ...mapGetters({
+      product: "productInfo",
+      mustReadDoc: "mustReadDoc",
+      productBook: "productBook",
+      productInfoBasic: "productInfoBasic",
+      isShowLight: "isShowLight",
+      productArticle: "productArticle",
+      questionList: "questionList",
+      salesProcess: "salesProcess",
+      introductionDocuments: "introductionDocuments",
+      readDocuments: "readDocuments",
+      signDocuments: "signDocuments",
+      copyText: "copyText"
+    })
+  },
+  components: {}
+};
 </script>
 
 <style lang="scss" scoped>
-  .finance {
-    &_info{
-      margin-top: 20rpx;
-      padding: $middle-space;
-      background: #ffffff;
-      @include flex(space-between, center);
-      border-bottom: 1px solid $borderColor;
-        &_basic{
-          @include flex( space-between );
-          &_logo{
-            width: 88rpx;
-            height: 88rpx;
-          }
-          &_name{
-            margin: 0 20rpx;
-            font-size: 32rpx;
-            color: $deepColor;
-            font-weight: 600;
-          }
-        }
-        &_read{
-          @include flex( space-between );
-          padding: $small-space;
-          border: 1px solid $borderColor;
-          border-radius: $default-border-radius;
-          &_icon{
-            width: 28rpx;
-            height: 28rpx;
-          }
-          &_text{
-            margin-left: 10rpx;
-            width: 40rpx;
-            font-size: 20rpx;
-            color: $lightColor;
-          }
-        }
-    }
-    &_attr{
-      padding: $middle-space;
-      background: #ffffff;
-      @include flex(space-around, center);
-      &_item{
-        width: 30%;
-        text-align: center;
-        @include text-truncate();
-        &_value{
-          font-size: 36rpx;
-          color: $mainColor;
-        }
-        &_label{
-          font-size: 24rpx;
-        }
-      }
-    }
-    &_admin{
-      padding: $middle-space;
-      background: #ffffff;
-      margin-top: 20rpx;
+.finance {
+  &_info {
+    margin-top: 20rpx;
+    padding: $middle-space;
+    background: #ffffff;
+    @include flex(space-between, center);
+    border-bottom: 1px solid $borderColor;
+    &_basic {
       @include flex(space-between);
-      &_item{
-        width: 330rpx;
-        height: 120rpx;
-        padding: $middle-space;
-        background: #FAFAFA;
-        border: 1px solid $borderColor;
-        border-radius: $default-border-radius;
-        @include flex(flex-start, center);
-        &_icon{
-          width: 70rpx;
-          height: 80rpx;
-        }
-        &_text{
-          margin-left: 20rpx;
-          font-size: 25rpx;
-          @include text-truncate();
-        }
+      &_logo {
+        width: 88rpx;
+        height: 88rpx;
+      }
+      &_name {
+        margin: 0 20rpx;
+        font-size: 32rpx;
+        color: $deepColor;
+        font-weight: 600;
       }
     }
-    &_points{
-      padding: $middle-space;
-      background: #ffffff;
-      margin-top: 20rpx;
-      &_title{
-        @include flex(space-between);
-        border-bottom: 1px solid $borderColor;
-        padding-bottom: 20rpx;
-        &_name{
-          font-size: 28rpx;
-          font-weight: 600;
-          width: 580rpx;
-          @include text-truncate();
-        }
-        &_copy{
-          padding: $small-space;
-          border: 1px solid $borderColor;
-          border-radius: $default-border-radius;
-          display: flex;
-          &_icon{
-            width: 28rpx;
-            height: 28rpx;
-          }
-          &_text{
-            margin-left: 10rpx;
-            font-size: 22rpx;
-            color: $lightColor;
-          }
-        }
+    &_read {
+      @include flex(space-between);
+      padding: $small-space;
+      border: 1px solid $borderColor;
+      border-radius: $default-border-radius;
+      &_icon {
+        width: 28rpx;
+        height: 28rpx;
       }
-      &_content{
-        padding-top: 20rpx;
-      }
-    }
-    &_other{
-      margin-top: 20rpx;
-      &_tabs{
-        display: flex;
-        &_item{
-          background: #ffffff;
-          padding: 20rpx 0;
-          width: 25%;
-          text-align: center;
-          &.active{
-            border-bottom: 5px solid $mainColor;
-          }
-        }
-      }
-      &_content{
-        margin-bottom: 20rpx;
-        &_information{
-          margin-top: 20rpx;
-          &_item{
-            background: #ffffff;
-            padding: $middle-space;
-            border-bottom: 1px solid $borderColor;
-            display: flex;
-            &_pic{
-              width: 120rpx;
-              height: 120rpx;
-            }
-            &_main{
-              margin-left: 20rpx;
-              @include flex(space-between, flex-start);
-              flex-direction: column;
-              &_name{
-                font-size: 26rpx;
-                font-weight: 600;
-              }
-              &_other{
-                font-size: 24rpx;
-                color: $lightColor;
-              }
-            }
-          }
-        }
-        &_part{
-          margin-top: 20rpx;
-          &_item{
-            background: #ffffff;
-            padding: $middle-space;
-            margin-bottom: 20rpx;
-            &_label{
-              font-size: 26rpx;
-              padding-bottom: $middle-space;
-              border-bottom: 1px solid $borderColor;
-            }
-            &_value{
-              padding-top: $middle-space;
-              font-size: 26rpx;
-              color: $lightColor;
-            }
-          }
-        }
-        &_process{
-          margin-top: 20rpx;
-          &_item{
-            background: #ffffff;
-            padding: $big-space;
-            margin-bottom: 20rpx;
-            &_pic{
-              width: 600rpx;
-              height: 300rpx;
-              margin: 0 auto;
-            }
-            &_text{
-              padding-top: 40rpx;
-              color: $lightColor;
-            }
-          }
-
-          .finance_problem{
-            &_title{
-              padding: $middle-space;
-              background: #ffffff;
-              border-bottom: 1px solid $borderColor;
-              &_text{
-                padding-left: $small-space;
-                border-left: 6px solid $mainColor;
-              }
-            }
-            &_content{
-              .finance_other_content_problem_item{
-                background: #ffffff;
-                padding: $middle-space;
-                border-bottom: 1px solid $borderColor;
-                &_question{
-                  @include flex(flex-start, center);
-                  &_icon{
-                    width: 38rpx;
-                    height: 38rpx;
-                  }
-                  &_text{
-                    margin-left: 20rpx;
-                    font-size: 26rpx;
-                  }
-                }
-                &_answer{
-                  margin-top: 20rpx;
-                  margin-left: 50rpx;
-                  border-radius: $default-border-radius;
-                  padding: $middle-space;
-                  background: #eeeeee;
-                  display: flex;
-                  &_icon{
-                    width: 38rpx;
-                    height: 38rpx;
-                  }
-                  &_text{
-                    margin-left: 20rpx;
-                    font-size: 26rpx;
-                    color: $lightColor;
-                    padding-bottom: 28rpx;
-                    position: relative;
-                    &_time{
-                      position: absolute;
-                      right: 0;
-                      bottom: 0;
-                      font-size: 24rpx;
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        &_file{
-          margin-top: 20rpx;
-          &_item{
-            margin-bottom: 20rpx;
-            &_title{
-              background: #ffffff;
-              padding: $middle-space;
-              font-size: 26rpx;
-              border-bottom: 1px solid $borderColor;
-            }
-            &_content{
-              &_title{
-                background: #ffffff;
-                padding: $middle-space;
-                font-size: 26rpx;
-                border-bottom: 1px solid $borderColor;
-                color: $lightColor;
-              }
-              &_item{
-                background: #ffffff;
-                padding: $middle-space;
-                font-size: 26rpx;
-                border-bottom: 1px solid $borderColor;
-                @include flex(space-between, center);
-                &:last-child{
-                  border-bottom: 0;
-                }
-                &_text{
-                  width: 640rpx;
-                  color: $mainColor;
-                  @include text-truncate();
-                }
-                &_icon{
-                  width: 38rpx;
-                  height: 38rpx;
-                }
-              }
-            }
-          }
-        }
-
-
-      }
-    }
-    &_footer{
-      width: 100%;
-      height: 100rpx;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      display: flex;
-      &_adviser{
-        width: 50%;
-        height: 100rpx;
-        text-align: center;
-        line-height: 100rpx;
-        background: #ffffff;
-        color: $mainColor;
-      }
-      &_invest{
-        width: 50%;
-        height: 100rpx;
-        background: $mainColor;
-        text-align: center;
-        line-height: 100rpx;
-        color: #ffffff;
+      &_text {
+        margin-left: 10rpx;
+        width: 40rpx;
+        font-size: 20rpx;
+        color: $lightColor;
       }
     }
   }
+  &_attr {
+    padding: $middle-space;
+    background: #ffffff;
+    @include flex(space-around, center);
+    &_item {
+      width: 30%;
+      text-align: center;
+      @include text-truncate();
+      &_value {
+        font-size: 36rpx;
+        color: $mainColor;
+      }
+      &_label {
+        font-size: 24rpx;
+      }
+    }
+  }
+  &_admin {
+    padding: $middle-space;
+    background: #ffffff;
+    margin-top: 20rpx;
+    @include flex(space-between);
+    &_item {
+      width: 330rpx;
+      height: 120rpx;
+      padding: $middle-space;
+      background: #fafafa;
+      border: 1px solid $borderColor;
+      border-radius: $default-border-radius;
+      @include flex(flex-start, center);
+      &_icon {
+        width: 70rpx;
+        height: 80rpx;
+      }
+      &_text {
+        margin-left: 20rpx;
+        font-size: 25rpx;
+        @include text-truncate();
+      }
+    }
+  }
+  &_points {
+    padding: $middle-space;
+    background: #ffffff;
+    margin-top: 20rpx;
+    &_title {
+      @include flex(space-between);
+      border-bottom: 1px solid $borderColor;
+      padding-bottom: 20rpx;
+      &_name {
+        font-size: 28rpx;
+        font-weight: 600;
+        width: 580rpx;
+        @include text-truncate();
+      }
+      &_copy {
+        padding: $small-space;
+        border: 1px solid $borderColor;
+        border-radius: $default-border-radius;
+        display: flex;
+        &_icon {
+          width: 28rpx;
+          height: 28rpx;
+        }
+        &_text {
+          margin-left: 10rpx;
+          font-size: 22rpx;
+          color: $lightColor;
+        }
+      }
+    }
+    &_content {
+      padding-top: 20rpx;
+    }
+  }
+  &_other {
+    margin-top: 20rpx;
+    &_tabs {
+      display: flex;
+      &_item {
+        background: #ffffff;
+        padding: 20rpx 0;
+        width: 25%;
+        text-align: center;
+        &.active {
+          border-bottom: 5px solid $mainColor;
+        }
+      }
+    }
+    &_content {
+      margin-bottom: 20rpx;
+      &_information {
+        margin-top: 20rpx;
+        &_item {
+          background: #ffffff;
+          padding: $middle-space;
+          border-bottom: 1px solid $borderColor;
+          display: flex;
+          &_pic {
+            width: 120rpx;
+            height: 120rpx;
+          }
+          &_main {
+            margin-left: 20rpx;
+            @include flex(space-between, flex-start);
+            flex-direction: column;
+            &_name {
+              font-size: 26rpx;
+              font-weight: 600;
+            }
+            &_other {
+              font-size: 24rpx;
+              color: $lightColor;
+            }
+          }
+        }
+      }
+      &_part {
+        margin-top: 20rpx;
+        &_item {
+          background: #ffffff;
+          padding: $middle-space;
+          margin-bottom: 20rpx;
+          &_label {
+            font-size: 26rpx;
+            padding-bottom: $middle-space;
+            border-bottom: 1px solid $borderColor;
+          }
+          &_value {
+            padding-top: $middle-space;
+            font-size: 26rpx;
+            color: $lightColor;
+          }
+        }
+      }
+      &_process {
+        margin-top: 20rpx;
+        &_item {
+          background: #ffffff;
+          padding: $big-space;
+          margin-bottom: 20rpx;
+          &_pic {
+            width: 600rpx;
+            height: 300rpx;
+            margin: 0 auto;
+          }
+          &_text {
+            padding-top: 40rpx;
+            color: $lightColor;
+          }
+        }
+
+        .finance_problem {
+          &_title {
+            padding: $middle-space;
+            background: #ffffff;
+            border-bottom: 1px solid $borderColor;
+            &_text {
+              padding-left: $small-space;
+              border-left: 6px solid $mainColor;
+            }
+          }
+          &_content {
+            .finance_other_content_problem_item {
+              background: #ffffff;
+              padding: $middle-space;
+              border-bottom: 1px solid $borderColor;
+              &_question {
+                @include flex(flex-start, center);
+                &_icon {
+                  width: 38rpx;
+                  height: 38rpx;
+                }
+                &_text {
+                  margin-left: 20rpx;
+                  font-size: 26rpx;
+                }
+              }
+              &_answer {
+                margin-top: 20rpx;
+                margin-left: 50rpx;
+                border-radius: $default-border-radius;
+                padding: $middle-space;
+                background: #eeeeee;
+                display: flex;
+                &_icon {
+                  width: 38rpx;
+                  height: 38rpx;
+                }
+                &_text {
+                  margin-left: 20rpx;
+                  font-size: 26rpx;
+                  color: $lightColor;
+                  padding-bottom: 28rpx;
+                  position: relative;
+                  &_time {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    font-size: 24rpx;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      &_file {
+        margin-top: 20rpx;
+        &_item {
+          margin-bottom: 20rpx;
+          &_title {
+            background: #ffffff;
+            padding: $middle-space;
+            font-size: 26rpx;
+            border-bottom: 1px solid $borderColor;
+          }
+          &_content {
+            &_title {
+              background: #ffffff;
+              padding: $middle-space;
+              font-size: 26rpx;
+              border-bottom: 1px solid $borderColor;
+              color: $lightColor;
+            }
+            &_item {
+              background: #ffffff;
+              padding: $middle-space;
+              font-size: 26rpx;
+              border-bottom: 1px solid $borderColor;
+              @include flex(space-between, center);
+              &:last-child {
+                border-bottom: 0;
+              }
+              &_text {
+                width: 640rpx;
+                color: $mainColor;
+                @include text-truncate();
+              }
+              &_icon {
+                width: 38rpx;
+                height: 38rpx;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &_footer {
+    width: 100%;
+    height: 100rpx;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    &_adviser {
+      width: 50%;
+      height: 100rpx;
+      text-align: center;
+      line-height: 100rpx;
+      background: #ffffff;
+      color: $mainColor;
+    }
+    &_invest {
+      width: 50%;
+      height: 100rpx;
+      background: $mainColor;
+      text-align: center;
+      line-height: 100rpx;
+      color: #ffffff;
+    }
+  }
+}
 </style>
 
 
