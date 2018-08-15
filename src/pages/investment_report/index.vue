@@ -60,7 +60,7 @@
 <style lang="scss" scoped>
   .report {
     li {
-      min-height: 158rpx;
+      min-height: 158px;
       @include flex(space-around, flex-start);
       flex-direction: column;
       margin-top: $small-space;
@@ -68,19 +68,19 @@
       background: #fff;
       color: $lightColor;
       h4 {
-        font-size: 30rpx;
+        font-size: 30px;
       }
       p {
-        font-size: 26rpx;
+        font-size: 26px;
         padding: $middle-space 0;
       }
     }
     li:first-child {
       min-height: auto;
-      @include size(100%, 80rpx);
+      @include size(100%, 80px);
       background: $backgroundColor;
       color: $deepColor;
-      font-size: 26rpx;
+      font-size: 26px;
       margin-top: 0;
     }
     &.unread li h4{
@@ -92,10 +92,10 @@
       @include flex(space-around);
       color: $mainColor;
       div {
-        @include size(240rpx, 75rpx);
+        @include size(240px, 75px);
         @include flex();
-        border: 2rpx solid $mainColor;
-        border-radius: 35rpx;
+        border: 2px solid $mainColor;
+        border-radius: 35px;
       }
     }
   }

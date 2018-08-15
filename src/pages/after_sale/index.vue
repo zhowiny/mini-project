@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" id="after_sale">
     <ul class="product">
       <li class="product_item" v-for="i in 5" :key="i" @click="toPage({url: '/pages/finance_details/main', data: {orderId: index}})">
         <h2 class="product_item_title">更改收益人</h2>
@@ -28,9 +28,11 @@
     data () {
       return {
         title: '售后申请',
+        isBottom: false,
+        pageRect: {},
       }
     },
-    created () {
+    onLoad () {
     },
     methods: {
       tips () {
@@ -54,15 +56,29 @@
         })
       }
     },
+    onReachBottom () {
+      this.isBottom = true
+      let query = wx.createSelectorQuery()
+      query.select('#after_sale').boundingClientRect()
+      query.selectViewport().scrollOffset()
+      query.exec((res) => {
+        this.pageRect.scrollTop = res[1].scrollTop
+      })
+    },
+    onPageScroll (e) {
+      if (e.scrollTop < this.pageRect.scrollTop) {
+        this.isBottom = false
+      }
+    },
     components: {
     },
   }
 </script>
 <style lang="scss" scoped>
   .product {
-    padding-bottom: 140rpx;
+    padding-bottom: 140px;
     &_item {
-      @include size(100%, 310rpx);
+      @include size(100%, 310px);
       margin-top: $middle-space;
       padding: $middle-space;
       background: #fff;
@@ -70,34 +86,34 @@
         @include flex(space-between);
         padding: $middle-space 0;
         color: $lightColor;
-        font-size: 26rpx;
+        font-size: 26px;
       }
       &_title {
-        font-size: 36rpx;
+        font-size: 36px;
       }
       &_status {
         color: $mainColor;
       }
       &_info {
-        @include size(100%, 170rpx);
+        @include size(100%, 170px);
         @include flex(space-around, stretch);
         padding: $middle-space 0;
         flex-direction: column;
         line-height: 1.6;
-        border-top: 2rpx solid $borderColor;
+        border-top: 2px solid $borderColor;
         div {
           @include flex(space-between);
-          font-size: 30rpx;
+          font-size: 30px;
         }
       }
     }
   }
   .btn {
-    @include size(480rpx, 100rpx);
+    @include size(480px, 100px);
     @include flex();
-    border: 2rpx solid $mainColor;
-    border-radius: 50rpx;
-    font-size: 36rpx;
+    border: 2px solid $mainColor;
+    border-radius: 50px;
+    font-size: 36px;
     color: $mainColor;
     position: fixed;
     bottom: 10px;

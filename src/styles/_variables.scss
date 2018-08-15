@@ -1,18 +1,18 @@
 @charset "UTF-8";
 //布局区块
 $defined-box-type : border-box !default;
-$small-space: 10rpx;
+$small-space: 10px;
 $middle-space: $small-space * 2;
 $big-space: $middle-space * 2;
 //==================================================
 //文字大小
 //==================================================
-$htmlsize: 28rpx;
+$htmlsize: 28px;
 //==================================================
 //颜色区块
 //==================================================
 //背景
-$mainColor: #4683ed; //主色
+$mainColor: #00ad74; //主色
 $backgroundColor: #f5f5f5;
 $borderColor: #eee;
 $deepColor: #262626; //深色

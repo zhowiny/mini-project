@@ -47,20 +47,20 @@
 
 <style lang="scss" scoped>
   .file_list {
-    font-size: 30rpx;
+    font-size: 30px;
     padding: 0 $middle-space;
     background: #fff;
     &:not(:first-child) {
       margin-top: $small-space;
     }
     h3, li {
-      @include size(100%, 100rpx);
+      @include size(100%, 100px);
       @include flex(space-between);
-      border-bottom: 1rpx solid $borderColor;
+      border-bottom: 1px solid $borderColor;
       color: $mainColor;
     }
     h3 {
-      border-top: 1rpx solid $borderColor;
+      border-top: 1px solid $borderColor;
       color: $deepColor;
     }
   }

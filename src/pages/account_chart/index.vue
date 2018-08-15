@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import wxPie from '@/components/pie'
+  import wxPie from '@/components/pie-chart'
   export default {
     data () {
       return {

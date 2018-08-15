@@ -39,9 +39,9 @@
 
 <style lang="scss" scoped>
   .records {
-    border-top: 1rpx solid transparent;
+    border-top: 1px solid transparent;
     li {
-      @include size(100%, 158rpx);
+      @include size(100%, 158px);
       @include flex(space-around, stretch);
       flex-direction: column;
       margin-top: $small-space;
@@ -49,12 +49,12 @@
       background: #fff;
       color: $lightColor;
       h4 {
-        font-size: 30rpx;
+        font-size: 30px;
         @include flex(space-between);
         color: $deepColor;
       }
       p {
-        font-size: 26rpx;
+        font-size: 26px;
       }
       &.unread h4{
         color: $deepColor;

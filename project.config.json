@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -9,8 +9,9 @@
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"appid": "wx852f55ac0db71552",
-	"projectname": "mini-project",
+	"appid": "wxcd7c5762adbd3cf5",
+	"projectname": "mx-c",
+	"libVersion": "2.2.2",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -20,13 +21,29 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": 0,
+					"name": "房产选客户",
+					"pathName": "pages/estate/process/choose_customer/main",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "房产详情",
+					"pathName": "pages/estate/product/product_detail/main"
+				}
+			]
 		}
 	}
 }
