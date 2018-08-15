@@ -1,12 +1,8 @@
 /* eslint-disable */
 import qs from 'qs'
-<<<<<<< HEAD
-import {API_DOMAIN, APPID, getTokenSecret} from './const'
-=======
 import { KEY } from './const'
 import md5 from 'blueimp-md5'
 import {API_DOMAIN, getTokenSecret, APPID} from './const'
->>>>>>> zhowiny
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 const API_DOMAIN = 'https://test-api-gateway.meixincn.com/'
-=======
-const API_DOMAIN = 'https://test-api-gateway.meixincn.com'
->>>>>>> zhowiny
 const APPID = 'wxcd7c5762adbd3cf5' // meixin－c
 const KEY = '3D274AC9D16CA655DAC63B44CCC0BC80'
 /** 手机品牌 **/
