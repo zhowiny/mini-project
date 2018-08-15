@@ -11,6 +11,10 @@ export default{
   getters: {
     // 产品基本信息
     productInfo: state => state.productInfo,
+    // 产品投资必读
+    mustReadDoc: state => state.productInfo.investment_required_documents,
+    // 产品书
+    productBook: state => state.productInfo.product_book_documents,
     // 产品属性
     productInfoBasic: state => state.productInfo.finance_extend,
     // 是否显示投资亮点

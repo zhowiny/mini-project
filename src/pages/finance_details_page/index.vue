@@ -201,9 +201,8 @@
 
     },
     mounted () {
-      this.productId = this.$root.$mp.query.product_id || 2457998
+      this.productId = this.$root.$mp.query.product_id || 2485652
       this.productType = this.$root.$mp.query.product_type || 1
-      console.log(this.$store)
       this.$store.dispatch('getProductInfo', {
         id: this.productId,
         type: this.productType
@@ -215,51 +214,66 @@
     },
     methods: {
       mustRead () {
-        wx.showLoading({
-          title: '加载中',
-        })
-        wx.downloadFile({
-          url: 'https://doc.meixinglobal.com/docs/20180208/1518061734588/36/Information Memorandum.pdf',
-          success: function (res) {
-            if (res.statusCode === 200) {
-              wx.hideLoading()
-              console.log(res)
-              var filePath = res.tempFilePath
-              wx.openDocument({
-                filePath: filePath,
-                success: function (res) {
-                  console.log(res)
-                  console.log('打开文档成功')
-                }
-              })
+        if (Object.prototype.toString.call(this.mustReadDoc) === '[object Array]' && this.mustReadDoc.length > 0) {
+          console.log(this.mustReadDoc[0].document_url)
+          wx.showLoading({
+            title: '加载中',
+          })
+          wx.downloadFile({
+            url: this.mustReadDoc[0].document_url,
+            success: function (res) {
+              if (res.statusCode === 200) {
+                wx.hideLoading()
+                console.log(res)
+                var filePath = res.tempFilePath
+                wx.openDocument({
+                  filePath: filePath,
+                  success: function (res) {
+                    console.log(res)
+                    console.log('打开文档成功')
+                  }
+                })
+              }
             }
-          }
-        })
+          })
+        } else {
+          wx.showToast({
+            title: '暂无文件',
+            icon: 'none',
+            duration: 2000
+          })
+        }
       },
       downloadProductBook () {
-        wx.showLoading({
-          title: '加载中',
-        })
-        wx.downloadFile({
-          url: 'https://doc.meixinglobal.com/docs/20180208/1518061316907/30/W8.pdf',
-          success: function (res) {
-            if (res.statusCode === 200) {
-              wx.hideLoading()
-              console.log(res)
-              var filePath = res.tempFilePath
-              wx.openDocument({
-                filePath: filePath,
-                success: function (res) {
-                  console.log(res)
-                  console.log('打开文档成功')
-                }
-              })
+        if (Object.prototype.toString.call(this.productBook) === '[object Array]' && this.productBook.length > 0) {
+          console.log(this.productBook[0].document_url)
+          wx.showLoading({
+            title: '加载中',
+          })
+          wx.downloadFile({
+            url: this.productBook[0].document_url,
+            success: function (res) {
+              if (res.statusCode === 200) {
+                wx.hideLoading()
+                console.log(res)
+                var filePath = res.tempFilePath
+                wx.openDocument({
+                  filePath: filePath,
+                  success: function (res) {
+                    console.log(res)
+                    console.log('打开文档成功')
+                  }
+                })
+              }
             }
-          }
-        })
-      },
-      goToAdmin () {
-
+          })
+        } else {
+          wx.showToast({
+            title: '暂无文件',
+            icon: 'none',
+            duration: 2000
+          })
+        }
       },
       copy () {
         wx.setClipboardData({
@@ -278,6 +292,8 @@
     computed: {
       ...mapGetters({
         product: 'productInfo',
+        mustReadDoc: 'mustReadDoc',
+        productBook: 'productBook',
         productInfoBasic: 'productInfoBasic',
         isShowLight: 'isShowLight',
         productArticle: 'productArticle',
