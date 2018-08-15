@@ -181,129 +181,129 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
-      title: "金融产品",
+      title: '金融产品',
       tabIndex: 0,
-      productId: "",
-      productType: ""
-    };
+      productId: '',
+      productType: ''
+    }
   },
-  created() {},
-  mounted() {
-    this.productId = this.$root.$mp.query.product_id || 2485652;
-    this.productType = this.$root.$mp.query.product_type || 1;
-    this.$store.dispatch("getProductInfo", {
+  created () {},
+  mounted () {
+    this.productId = this.$root.$mp.query.product_id || 2485652
+    this.productType = this.$root.$mp.query.product_type || 1
+    this.$store.dispatch('getProductInfo', {
       id: this.productId,
       type: this.productType
-    });
-    this.$store.dispatch("getProductArticle", {
+    })
+    this.$store.dispatch('getProductArticle', {
       id: this.productId,
       type: this.productType
-    });
+    })
   },
   methods: {
-    mustRead() {
+    mustRead () {
       if (
-        Object.prototype.toString.call(this.mustReadDoc) === "[object Array]" &&
+        Object.prototype.toString.call(this.mustReadDoc) === '[object Array]' &&
         this.mustReadDoc.length > 0
       ) {
-        console.log(this.mustReadDoc[0].document_url);
+        console.log(this.mustReadDoc[0].document_url)
         wx.showLoading({
-          title: "加载中"
-        });
+          title: '加载中'
+        })
         wx.downloadFile({
           url: this.mustReadDoc[0].document_url,
-          success: function(res) {
+          success: function (res) {
             if (res.statusCode === 200) {
-              wx.hideLoading();
-              console.log(res);
-              var filePath = res.tempFilePath;
+              wx.hideLoading()
+              console.log(res)
+              var filePath = res.tempFilePath
               wx.openDocument({
                 filePath: filePath,
-                success: function(res) {
-                  console.log(res);
-                  console.log("打开文档成功");
+                success: function (res) {
+                  console.log(res)
+                  console.log('打开文档成功')
                 }
-              });
+              })
             }
           }
-        });
+        })
       } else {
         wx.showToast({
-          title: "暂无文件",
-          icon: "none",
+          title: '暂无文件',
+          icon: 'none',
           duration: 2000
-        });
+        })
       }
     },
-    downloadProductBook() {
+    downloadProductBook () {
       if (
-        Object.prototype.toString.call(this.productBook) === "[object Array]" &&
+        Object.prototype.toString.call(this.productBook) === '[object Array]' &&
         this.productBook.length > 0
       ) {
-        console.log(this.productBook[0].document_url);
+        console.log(this.productBook[0].document_url)
         wx.showLoading({
-          title: "加载中"
-        });
+          title: '加载中'
+        })
         wx.downloadFile({
           url: this.productBook[0].document_url,
-          success: function(res) {
+          success: function (res) {
             if (res.statusCode === 200) {
-              wx.hideLoading();
-              console.log(res);
-              var filePath = res.tempFilePath;
+              wx.hideLoading()
+              console.log(res)
+              var filePath = res.tempFilePath
               wx.openDocument({
                 filePath: filePath,
-                success: function(res) {
-                  console.log(res);
-                  console.log("打开文档成功");
+                success: function (res) {
+                  console.log(res)
+                  console.log('打开文档成功')
                 }
-              });
+              })
             }
           }
-        });
+        })
       } else {
         wx.showToast({
-          title: "暂无文件",
-          icon: "none",
+          title: '暂无文件',
+          icon: 'none',
           duration: 2000
-        });
+        })
       }
     },
-    copy() {
+    copy () {
       wx.setClipboardData({
         data: this.copyText,
-        success: function(res) {
+        success: function (res) {
           wx.getClipboardData({
-            success: function(res) {
-              console.log(res); // data
+            success: function (res) {
+              console.log(res)
             }
-          });
+          })
         }
-      });
+      })
     }
   },
   computed: {
     ...mapGetters({
-      product: "productInfo",
-      mustReadDoc: "mustReadDoc",
-      productBook: "productBook",
-      productInfoBasic: "productInfoBasic",
-      isShowLight: "isShowLight",
-      productArticle: "productArticle",
-      questionList: "questionList",
-      salesProcess: "salesProcess",
-      introductionDocuments: "introductionDocuments",
-      readDocuments: "readDocuments",
-      signDocuments: "signDocuments",
-      copyText: "copyText"
+      product: 'productInfo',
+      mustReadDoc: 'mustReadDoc',
+      productBook: 'productBook',
+      productInfoBasic: 'productInfoBasic',
+      isShowLight: 'isShowLight',
+      productArticle: 'productArticle',
+      questionList: 'questionList',
+      salesProcess: 'salesProcess',
+      introductionDocuments: 'introductionDocuments',
+      readDocuments: 'readDocuments',
+      signDocuments: 'signDocuments',
+      copyText: 'copyText'
     })
   },
   components: {}
-};
+}
 </script>
 
 <style lang="scss" scoped>
