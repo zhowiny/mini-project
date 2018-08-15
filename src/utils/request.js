@@ -1,5 +1,12 @@
+/* eslint-disable */
 import qs from 'qs'
+<<<<<<< HEAD
 import {API_DOMAIN, APPID, getTokenSecret} from './const'
+=======
+import { KEY } from './const'
+import md5 from 'blueimp-md5'
+import {API_DOMAIN, getTokenSecret, APPID} from './const'
+>>>>>>> zhowiny
 const Fly = require('flyio/dist/npm/wx')
 const fly = new Fly()
 
@@ -7,6 +14,7 @@ fly.interceptors.request.use((config, promise) => {
   // 给所有请求添加自定义header
   // config.headers['X-Tag'] = 'flyio'
   config.headers['app_id'] = APPID
+<<<<<<< HEAD
   if (!~config.url.indexOf('?') && !~config.url.indexOf('access_token')) {
     let params = {
       sessionId: getTokenSecret().secret,
@@ -14,6 +22,10 @@ fly.interceptors.request.use((config, promise) => {
     }
     config.url += `?${qs.stringify(params)}`
   }
+=======
+  let md5str = Object.values(config.body).concat(KEY).join('&')
+  Object.assign(config.body, {sign: md5(md5str)})
+>>>>>>> zhowiny
   wx.showLoading({
     title: '加载中',
   })
@@ -22,9 +34,17 @@ fly.interceptors.request.use((config, promise) => {
 
 // 添加响应拦截器，响应拦截器会在then/catch处理之前执行
 fly.interceptors.response.use((response) => {
-  // 只将请求结果的data字段返回
   wx.hideLoading()
-  return response.data
+  if (response.data.code === 1 && response.data.msg === 'success') {
+    return response.data.body
+  }
+  wx.showToast({
+    title: response.data.msg,
+    icon: 'none',
+    duration: 3000,
+    mask: true,
+  })
+  return Promise.reject(response.data)
 }, err => {
   // 发生网络错误后会走到这里
   wx.hideLoading()

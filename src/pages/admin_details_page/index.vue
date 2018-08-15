@@ -2,13 +2,13 @@
   <div class="container">
     <div class="admin">
       <div class="admin_info">
-        <p class="admin_info_pic"> <img class="admin_info_pic" mode="scaleToFill" src="/images/test.png" alt=""> </p>
+        <p class="admin_info_pic"> <img class="admin_info_pic" mode="scaleToFill" :src="productAdmin.logo" alt=""> </p>
         <div class="admin_info_main">
-          <p class="admin_info_main_name"> 克罗牛地产通道基金 </p>
+          <p class="admin_info_main_name"> {{productAdmin.name}} </p>
           <div class="admin_info_main_label">
-            <p class="admin_info_main_label_solid"> 官方通道 </p>
-            <p class="admin_info_main_label_solid"> 线上签署 </p>
-            <p class="admin_info_main_label_hollow"> 全球第五大基金 </p>
+            <p class="admin_info_main_label_solid" v-if="isAuthority"> 官方通道 </p>
+            <!-- <p class="admin_info_main_label_solid"> 线上签署 </p> -->
+            <p class="admin_info_main_label_hollow" v-for="(item, index) in tags" :key="index"> {{item}} </p>
           </div>
         </div>
       </div>
@@ -18,7 +18,7 @@
           <p class="admin_title_icon"> <img class="admin_title_icon" mode="scaleToFill" src="/images/icon_adminTitle.png" alt=""> </p>
           <p class="admin_title_text"> 基本信息 </p>
         </div>
-        <div class="admin_basic_content"> 123123123123213123ewqewqewqeqwewqeqwewqeqwewqewqewqeqwefwefewfrvre12 </div>
+        <div class="admin_basic_content"> {{productAdmin.introduction}} </div>
       </div>
 
       <div class="admin_people">
@@ -26,26 +26,10 @@
           <p class="admin_title_icon"> <img class="admin_title_icon" mode="scaleToFill" src="/images/icon_adminTitle.png" alt=""> </p>
           <p class="admin_title_text"> 管理团队 </p>
         </div>
-        <div class="admin_people_content">
-          <div class="admin_people_content_item">
-            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_people_content_item_name"> sayhfnswqeqweqwx </p>
-          </div>
-          <div class="admin_people_content_item">
-            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_people_content_item_name"> sayhfns </p>
-          </div>
-          <div class="admin_people_content_item">
-            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_people_content_item_name"> sayhfns </p>
-          </div>
-          <div class="admin_people_content_item">
-            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_people_content_item_name"> sayhfns </p>
-          </div>
-          <div class="admin_people_content_item">
-            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_people_content_item_name"> sayhfns </p>
+        <div class="admin_people_content" @click="toPage({url: '/pages/admin_team_page/main', data: {management_id: managementId}})">
+          <div class="admin_people_content_item" v-for="(item, index) in productAdminTeam" :key="index">
+            <p class="admin_people_content_item_pic"> <img class="admin_people_content_item_pic" mode="scaleToFill" :src="item.logo_url" alt=""> </p>
+            <p class="admin_people_content_item_name"> {{item.name}} </p>
           </div>
         </div>
       </div>
@@ -56,25 +40,9 @@
           <p class="admin_title_text"> 获得奖项 </p>
         </div>
         <div class="admin_prize_content">
-          <div class="admin_prize_content_item">
-            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_prize_content_item_text"> 23213 </p>
-          </div>
-          <div class="admin_prize_content_item">
-            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_prize_content_item_text"> 123213 </p>
-          </div>
-          <div class="admin_prize_content_item">
-            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_prize_content_item_text"> 213123 </p>
-          </div>
-          <div class="admin_prize_content_item">
-            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_prize_content_item_text"> 23123 </p>
-          </div>
-          <div class="admin_prize_content_item">
-            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" src="/images/icon_immigrant.png" alt=""> </p>
-            <p class="admin_prize_content_item_text"> 2132121321321321312321 </p>
+          <div class="admin_prize_content_item" v-for="(item, index) in productAdminAwards" :key="index">
+            <p class="admin_prize_content_item_pic"> <img class="admin_prize_content_item_pic" mode="scaleToFill" :src="item.awards_url" alt=""> </p>
+            <p class="admin_prize_content_item_text"> {{item.name}} </p>
           </div>
         </div>
       </div>
@@ -84,14 +52,10 @@
           <p class="admin_title_icon"> <img class="admin_title_icon" mode="scaleToFill" src="/images/icon_adminTitle.png" alt=""> </p>
           <p class="admin_title_text">  资管特色 </p>
         </div>
-        <div class="admin_feature_content">
+        <div class="admin_feature_content" v-for="(item, index) in productAdminNews" :key="index">
           <div class="admin_feature_content_item">
-            <p class="admin_feature_content_item_pic"> <img class="admin_feature_content_item_pic" mode="scaleToFill" src="/images/icon_adminTitle.png" alt="">  </p>
-            <p class="admin_feature_content_item_text"> 31233123312321321321321321312321312321 </p>
-          </div>
-          <div class="admin_feature_content_item">
-            <p class="admin_feature_content_item_pic"> <img class="admin_feature_content_item_pic" mode="scaleToFill" src="/images/icon_adminTitle.png" alt="">  </p>
-            <p class="admin_feature_content_item_text"> 31233123312321321321321321312321312321 </p>
+            <p class="admin_feature_content_item_pic"> <img class="admin_feature_content_item_pic" mode="scaleToFill" :src="item.logo_url" alt="">  </p>
+            <p class="admin_feature_content_item_text"> {{item.introduction}} </p>
           </div>
         </div>
       </div>
@@ -102,21 +66,21 @@
           <p class="admin_title_text">  相关产品 </p>
         </div>
         <div class="admin_product_content">
-          <div class="admin_product_content_item">
-            <p class="admin_product_content_item_type green"> 111 </p>
-            <div class="admin_product_content_item_title"> 柯罗尼物流地产通道基金-1年期 </div>
+          <div class="admin_product_content_item" v-for="(item, index) in productAdminPro" :key="index" @click="toPage({url: '/pages/finance_details_page/main', data: {product_type: item.product_type,product_id: item.product_id}})">
+            <!-- <p class="admin_product_content_item_type green"> {{item.tag_name}} </p> -->
+            <div class="admin_product_content_item_title"> {{item.product_name}}  </div>
             <div class="admin_product_content_item_content">
               <div class="admin_product_content_item_content_attr">
-                <p class="admin_product_content_item_content_attr_value"> 6.00%-7.50% </p>
+                <p class="admin_product_content_item_content_attr_value"> {{item.return_rate}} </p>
                 <p class="admin_product_content_item_content_attr_label"> 预计年化 </p>
               </div>
               <div class="admin_product_content_item_content_attr">
-                <p class="admin_product_content_item_content_attr_value"> 12个月锁定期 </p>
+                <p class="admin_product_content_item_content_attr_value"> {{item.invest_term}} </p>
                 <p class="admin_product_content_item_content_attr_label"> 投资期限 </p>
               </div>
               <div class="admin_product_content_item_content_attr">
-                <p class="admin_product_content_item_content_attr_value"> ** </p>
-                <p class="admin_product_content_item_content_attr_label"> 佣金比例 </p>
+                <p class="admin_product_content_item_content_attr_value"> {{item.minimum_invest_amount}} </p>
+                <p class="admin_product_content_item_content_attr_label"> 投资金额 </p>
               </div>
             </div>
           </div>
@@ -128,33 +92,45 @@
           <p class="admin_title_icon"> <img class="admin_title_icon" mode="scaleToFill" src="/images/icon_adminTitle.png" alt=""> </p>
           <p class="admin_title_text">  入驻信息 </p>
         </div>
-        <div class="admin_in_content"> 23312321321321321321312321312321 </div>
+        <div class="admin_in_content"> {{productAdmin.settled}} </div>
       </div>
-
-
-
-
-
-
     </div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   export default {
     data () {
       return {
-        title: '资官方页面',
+        title: '资管方',
+        managementId: '',
       }
     },
     created () {
 
     },
+    mounted () {
+      this.managementId = this.$root.$mp.query.management_id || 2484378
+      this.$store.dispatch('getProductAdmin', {
+        management_id: this.managementId,
+      })
+    },
     methods: {
 
     },
-    components: {
-    },
+    computed: {
+      ...mapGetters({
+        productAdmin: 'productAdmin',
+        productAdminTeam: 'productAdminTeam',
+        productAdminAwards: 'productAdminAwards',
+        productAdminNews: 'productAdminNews',
+        productAdminPro: 'productAdminPro',
+        isAuthority: 'isAuthority',
+        tags: 'tags',
+      })
+    }
+
   }
 </script>
 
@@ -165,7 +141,7 @@
       background: #ffffff;
       @include flex(flex-start, center);
       &_pic{
-        width: 190rpx;
+        width: 100rpx;
         height: 100rpx;
       }
       &_main{
@@ -224,7 +200,7 @@
         }
         &_item{
           margin-top: 20rpx;
-          margin-right: 40rpx;
+          margin-right: 60rpx;
           &_pic{
             margin: 0 auto;
             width: 160rpx;
@@ -303,7 +279,7 @@
             font-size: 20rpx;
             border-radius: 20rpx;
             position: absolute;
-            right: -30rpx;
+            right: -35rpx;
             top: 5rpx;
             &.green{
               background: green;

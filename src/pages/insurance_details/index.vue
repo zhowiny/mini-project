@@ -6,11 +6,11 @@
       <ul class="order_info_content">
         <li>
           <span>合同编号</span>
-          <span>123456789456</span>
+          <span>{{detail.order_number}}</span>
         </li>
         <li>
           <span>生效日期</span>
-          <span>2018-6-23</span>
+          <span>{{detail.created_at}}</span>
         </li>
         <li>
           <span>产品类型</span>
@@ -18,7 +18,7 @@
         </li>
         <li>
           <span>产品名称</span>
-          <span>加裕智倍安保-18-年缴</span>
+          <span>{{detail.product_name}}</span>
         </li>
         <li>
           <span>投保人</span>
@@ -34,7 +34,7 @@
         </li>
         <li>
           <span>保额</span>
-          <span>100,000美元</span>
+          <span>{{detail.invest_amount}}美元</span>
         </li>
       </ul>
     </div>
@@ -125,6 +125,8 @@
 
 <script>
   import wxSteps from '@/components/steps'
+  import {mapGetters, mapActions} from 'vuex'
+
   export default {
     data () {
       return {
@@ -138,9 +140,40 @@
         ],
       }
     },
-    created () {
+    computed: {
+      ...mapGetters({
+        detail: 'orderDetail',
+        userInfo: 'userInfo'
+      }),
+    },
+    async onLoad () {
+      this.orderNumber = this.$mp.query.orderNumber
+      await this.getOrderDetail({
+        unitive_advisor_id: this.userInfo.userId,
+        order_number: this.orderNumber,
+        timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+      })
+      this.detail.end_sale_time = this.format(new Date(this.detail.end_sale_time), 'yyyy-MM-dd')
+      switch (this.detail.order_status_desc) {
+        case '预约':
+          this.step = 1
+          break
+        case '合同申请':
+          this.step = 2
+          break
+        case '待入金':
+          this.step = 3
+          break
+        case '已入金':
+          this.step = 4
+          break
+        default:
+          this.step = 0
+          break
+      }
     },
     methods: {
+      ...mapActions(['getOrderDetail']),
     },
     components: {
       wxSteps

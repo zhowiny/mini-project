@@ -1,28 +1,28 @@
 <template>
   <div class="container">
-    <wx-steps :active="active" :steps="steps"/>
+    <wx-steps :active="step" :steps="steps"/>
     <div class="order_info">
       <div class="order_info_title"><span></span>订单信息</div>
       <ul class="order_info_content">
         <li>
           <span>订单编号</span>
-          <span>123456789456</span>
+          <span>{{detail.order_number}}</span>
         </li>
         <li>
           <span>产品名称</span>
-          <span>曼谷双地铁公寓</span>
+          <span>{{detail.product_name}}</span>
         </li>
         <li>
           <span>成交时间</span>
-          <span>2018-6-23 9:11</span>
+          <span>{{detail.created_at}}</span>
         </li>
         <li>
           <span>投资金额</span>
-          <span>200,000.00泰铢</span>
+          <span>{{detail.invest_amount}}</span>
         </li>
         <li>
           <span>交房时间</span>
-          <span>2017-7-16</span>
+          <span>{{detail.end_sale_time}}</span>
         </li>
         <li>
           <span>房间号</span>
@@ -30,9 +30,9 @@
         </li>
       </ul>
     </div>
-    <div class="renewal_insurance">
-      <div class="renewal_insurance_title"><span></span>续保信息</div>
-      <ul class="renewal_insurance_content">
+    <div class="pay_plan">
+      <div class="pay_plan_title"><span></span>付款计划</div>
+      <ul class="pay_plan_content">
         <li >
           <span>首付(30%)</span>
           <span>60,000.00泰铢</span>
@@ -49,9 +49,9 @@
     </div>
     <ul class="other">
       <li class="other_item" @click="toPage({url: '/pages/file_page/main', data: {orderId: 1}})">
-        <image mode="aspectFit" src="/images/icon_file.png" style="width: 50rpx;height:50rpx"></image>
+        <img mode="aspectFit" src="/images/icon_file.png" style="width: 50rpx;height:50rpx"/>
         <span class="other_item_title">投资文件</span>
-        <image mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"></image>
+        <img mode="aspectFit" src="/images/icon_arrow.png" style="width: 14rpx;height:24rpx"/>
       </li>
       <!--<li class="other_item" @click="toPage({url: '/pages/investment_report/main', data: {orderId: 2}})">
         <image mode="aspectFit" src="/images/icon_report1.png" style="width: 50rpx;height:50rpx"></image>
@@ -69,11 +69,14 @@
 
 <script>
   import wxSteps from '@/components/steps'
+  import {mapGetters, mapActions} from 'vuex'
+
   export default {
     data () {
       return {
         title: '海外房产订单详情',
-        active: 3,
+        orderNumber: '',
+        step: 0,
         steps: [
           {title: '预约中'},
           {title: '已签单'},
@@ -82,9 +85,40 @@
         ],
       }
     },
-    created () {
+    computed: {
+      ...mapGetters({
+        detail: 'orderDetail',
+        userInfo: 'userInfo'
+      }),
+    },
+    async onLoad () {
+      this.orderNumber = this.$mp.query.orderNumber
+      await this.getOrderDetail({
+        unitive_advisor_id: this.userInfo.userId,
+        order_number: this.orderNumber,
+        timestamp: this.format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+      })
+      this.detail.end_sale_time = this.format(new Date(this.detail.end_sale_time), 'yyyy-MM-dd')
+      switch (this.detail.order_status_desc) {
+        case '预约':
+          this.step = 1
+          break
+        case '合同申请':
+          this.step = 2
+          break
+        case '待入金':
+          this.step = 3
+          break
+        case '已入金':
+          this.step = 4
+          break
+        default:
+          this.step = 0
+          break
+      }
     },
     methods: {
+      ...mapActions(['getOrderDetail']),
     },
     components: {
       wxSteps
@@ -142,7 +176,7 @@
       }
     }
   }
-  .renewal_insurance {
+  .pay_plan {
     @extend  .order_info;
     &_title {
       @extend .order_info_title;

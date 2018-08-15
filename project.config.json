@@ -11,6 +11,7 @@
 	"compileType": "miniprogram",
 	"appid": "wxcd7c5762adbd3cf5",
 	"projectname": "mx-c",
+	"libVersion": "2.2.2",
 	"condition": {
 		"search": {
 			"current": -1,
